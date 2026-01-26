@@ -14,94 +14,106 @@
       text-align: center;
     }
 
+    h1 { margin-top: 0; }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
     .card {
       background: white;
-      max-width: 420px;
-      margin: 20px auto;
-      padding: 30px;
+      max-width: 320px;
+      padding: 25px;
       border-radius: 14px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      flex: 1 1 280px;
     }
 
-    h1 {
-      margin-top: 0;
+    .card h2 { margin-top: 0; margin-bottom: 10px; }
+    .price { font-size: 22px; font-weight: bold; margin-bottom: 10px; }
+    .highlight { background: #e6f7ff; border: 2px solid #00aaff; }
+
+    .btn-whatsapp {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #25D366;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    h2 {
-      margin-bottom: 5px;
-    }
+    .btn-whatsapp:hover { opacity: 0.85; }
 
-    p {
-      color: #555;
-      line-height: 1.5;
-      margin-top: 0;
-      margin-bottom: 15px;
-    }
-
-    hr {
-      border: 0;
-      border-top: 1px solid #ddd;
-      margin: 30px 0;
-    }
+    p { color: #555; line-height: 1.5; margin-top: 0; margin-bottom: 15px; }
+    hr { border: 0; border-top: 1px solid #ddd; margin: 30px 0; width: 80%; }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Drop&Go Water 💧</h1>
-    <p>20L filtered water delivered weekly<br>Straight to your door</p>
+  <h1>Drop&Go Water 💧</h1>
+  <p>20L filtered water delivered weekly straight to your door</p>
 
-    <!-- Quarterly subscription -->
-    <h2>Quarterly subscription 🔁</h2>
-    <p><strong>R390 per term</strong></p>
+  <div class="container">
+    <!-- Quarterly subscription card -->
+    <div class="card">
+      <h2>Quarterly subscription 🔁</h2>
+      <div class="price">R390 / term</div>
+      <p>Recurring every term</p>
 
-    <form action="https://payment.payfast.io/eng/process" method="post">
-      <input type="hidden" name="cmd" value="_paynow">
-      <input type="hidden" name="receiver" value="21742448">
-      <input type="hidden" name="amount" value="390">
-      <input type="hidden" name="item_name" value="DropAndGo (R390 a Term)">
-      <input type="hidden" name="item_description" value="Knock Knock. It's your water. 20L delivered weekly.">
-      <input type="hidden" name="subscription_type" value="1">
-      <input type="hidden" name="recurring_amount" value="390">
-      <input type="hidden" name="cycles" value="0">
-      <input type="hidden" name="frequency" value="4">
+      <form action="https://payment.payfast.io/eng/process" method="post">
+        <input type="hidden" name="cmd" value="_paynow">
+        <input type="hidden" name="receiver" value="21742448">
+        <input type="hidden" name="amount" value="390">
+        <input type="hidden" name="item_name" value="DropAndGo (R390 a Term)">
+        <input type="hidden" name="item_description" value="Knock Knock. It's your water. 20L delivered weekly.">
+        <input type="hidden" name="subscription_type" value="1">
+        <input type="hidden" name="recurring_amount" value="390">
+        <input type="hidden" name="cycles" value="0">
+        <input type="hidden" name="frequency" value="4">
 
-      <input type="image"
-        src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
-        alt="Subscribe Quarterly with PayFast">
-    </form>
+        <input type="image"
+          src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
+          alt="Subscribe Quarterly with PayFast">
+      </form>
 
-    <p style="font-size: 12px; margin-top: 10px;">
-      Secure payment via PayFast
-    </p>
+      <p style="font-size: 12px;">Secure payment via PayFast</p>
+    </div>
 
-    <hr>
+    <!-- Annual subscription card -->
+    <div class="card highlight">
+      <h2>Annual subscription ⭐</h2>
+      <div class="price">R1280 / year</div>
+      <p>Auto-renews annually · Save 17%</p>
 
-    <!-- Annual subscription -->
-    <h2>Annual subscription ⭐</h2>
-    <p><strong>R1280 per year</strong><br>Auto-renews annually · Save 17%</p>
+      <form action="https://payment.payfast.io/eng/process" method="post">
+        <input type="hidden" name="cmd" value="_paynow">
+        <input type="hidden" name="receiver" value="21742448">
+        <input type="hidden" name="amount" value="1280">
+        <input type="hidden" name="item_name" value="DropAndGo Annual Water Subscription">
+        <input type="hidden" name="item_description" value="20L filtered water delivered weekly. Billed annually.">
+        <input type="hidden" name="subscription_type" value="1">
+        <input type="hidden" name="recurring_amount" value="1280">
+        <input type="hidden" name="cycles" value="0">
+        <input type="hidden" name="frequency" value="6">
 
-    <form action="https://payment.payfast.io/eng/process" method="post">
-      <input type="hidden" name="cmd" value="_paynow">
-      <input type="hidden" name="receiver" value="21742448">
-      <input type="hidden" name="amount" value="1280">
-      <input type="hidden" name="item_name" value="DropAndGo Annual Water Subscription">
-      <input type="hidden" name="item_description" value="20L filtered water delivered weekly. Billed annually.">
-      <input type="hidden" name="subscription_type" value="1">
-      <input type="hidden" name="recurring_amount" value="1280">
-      <input type="hidden" name="cycles" value="0">
-      <input type="hidden" name="frequency" value="6">
+        <input type="image"
+          src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
+          alt="Subscribe Annually with PayFast">
+      </form>
 
-      <input type="image"
-        src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
-        alt="Subscribe Annually with PayFast">
-    </form>
-
-    <p style="font-size: 12px; margin-top: 10px;">
-      Secure payment via PayFast
-    </p>
-
+      <p style="font-size: 12px;">Secure payment via PayFast</p>
+    </div>
   </div>
+
+  <!-- WhatsApp support -->
+  <a class="btn-whatsapp" href="https://wa.me/0825233426?text=Hi%20I%20need%20help%20with%20Drop%26Go%20subscriptions" target="_blank">
+    Chat with us on WhatsApp
+  </a>
 
 </body>
 </html>
