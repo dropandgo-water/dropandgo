@@ -20,6 +20,7 @@
       padding: 40px 20px;
       color: #2d3436;
       line-height: 1.6;
+      text-align: center;
     }
 
     h1 { 
@@ -27,6 +28,7 @@
       margin-bottom: 10px; 
       color: #023e8a;
       letter-spacing: -1px;
+      margin-top: 0;
     }
 
     .subtitle { 
@@ -38,7 +40,6 @@
       letter-spacing: 2px;
     }
 
-    /* Aesthetic Steps Section */
     .steps-wrapper {
       display: flex;
       justify-content: center;
@@ -94,7 +95,6 @@
       margin: 10px 0 0 0;
     }
 
-    /* Pricing Section */
     .container {
       display: flex;
       justify-content: center;
@@ -111,6 +111,7 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.05);
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
 
     .pricing-card.best-value {
@@ -147,6 +148,7 @@
       border: 1px solid #e0e0e0;
       background: #f9f9f9;
       transition: border 0.3s;
+      font-size: 13px;
     }
 
     .form-input:focus {
@@ -170,17 +172,13 @@
     .whatsapp-btn:hover {
       background: #1ebe57;
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.3);
     }
 
     input[type="image"] {
       width: 100%;
       height: auto;
       margin-top: 10px;
-      transition: opacity 0.2s;
     }
-
-    input[type="image"]:hover { opacity: 0.9; }
 
     @media (max-width: 768px) {
       .pricing-card.best-value { transform: scale(1); }
@@ -229,9 +227,9 @@
         <input type="hidden" name="amount" value="390">
         <input type="hidden" name="item_name" value="DropAndGo Quarterly Subscription">
         
-        <input class="form-input" type="text" name="name_first" placeholder="Name & Surname" required>
-        <input class="form-input" type="text" name="custom_str1" placeholder="Residence & Room Nr" required>
-        <input class="form-input" type="tel" name="cell_number" placeholder="Phone Number" required>
+        <input class="form-input" type="text" name="name_first" placeholder="Name_Surname (e.g: Hugo_Radley)" required>
+        <input class="form-input" type="text" name="custom_str1" placeholder="Residence_SectionNr_RoomNr (e.g: Dagbreek_6_7)" required>
+        <input class="form-input" type="tel" name="cell_number" placeholder="PhoneNumber (e.g: 0825233426)" required>
         
         <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png">
       </form>
@@ -248,9 +246,9 @@
         <input type="hidden" name="amount" value="1280">
         <input type="hidden" name="item_name" value="DropAndGo Annual Subscription">
         
-        <input class="form-input" type="text" name="name_first" placeholder="Name & Surname" required>
-        <input class="form-input" type="text" name="custom_str1" placeholder="Residence & Room Nr" required>
-        <input class="form-input" type="tel" name="cell_number" placeholder="Phone Number" required>
+        <input class="form-input" type="text" name="name_first" placeholder="Name_Surname (e.g: Hugo_Radley)" required>
+        <input class="form-input" type="text" name="custom_str1" placeholder="Residence_SectionNr_RoomNr (e.g: Dagbreek_6_7)" required>
+        <input class="form-input" type="tel" name="cell_number" placeholder="PhoneNumber (e.g: 0825233426)" required>
         
         <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png">
       </form>
