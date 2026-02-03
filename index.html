@@ -21,6 +21,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
+      margin-top: 30px;
     }
 
     .card {
@@ -32,7 +33,16 @@
       flex: 1 1 280px;
     }
 
-    .highlight { background: #e6f7ff; border: 2px solid #00aaff; }
+    .highlight {
+      background: #e6f7ff;
+      border: 2px solid #00aaff;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
     .form-input {
       width: 100%;
@@ -42,95 +52,191 @@
       border: 1px solid #ccc;
       font-size: 14px;
     }
+
+    p {
+      color: #555;
+      line-height: 1.5;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .btn-whatsapp {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #25D366;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-whatsapp:hover { opacity: 0.85; }
+
+    /* Steps section */
+    .steps-section {
+      max-width:900px;
+      margin:25px auto 35px auto;
+      text-align:center;
+    }
+
+    .steps-title {
+      margin-bottom:20px;
+      font-size:26px;
+    }
+
+    .steps-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+
+    .step-card {
+      background:#ffffff;
+      padding:20px;
+      border-radius:16px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .step-icon {
+      font-size:34px;
+      margin-bottom:10px;
+    }
+
+    .step-title {
+      margin:0 0 8px 0;
+    }
+
+    .step-desc {
+      margin:0;
+      color:#555;
+      font-size:14px;
+    }
   </style>
 </head>
 <body>
 
-<h1>Drop&Go Water 💧</h1>
-<div style="max-width:700px;margin:15px auto 30px auto;text-align:left;background:#ffffff;padding:20px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,0.08);">
-  <ol style="padding-left:20px;margin:0;">
-    <li style="margin-bottom:12px;">
-      <strong>Pick your plan:</strong> Choose a term or annual subscription and sign up in seconds.
-    </li>
-    <li style="margin-bottom:12px;">
-      <strong>The Monday drop:</strong> Receive your first 20L tank this Monday — we’ll swap it for a fresh one every week as long as your subscription is active.
-    </li>
-    <li>
-      <strong>Pay for what you use:</strong> If you sign up mid-term, any weeks you missed are automatically credited as a rebate toward your next subscription.
-    </li>
-  </ol>
-</div>
+  <h1>Drop&Go Water 💧</h1>
 
+  <!-- Steps to Easy Water -->
+  <div class="steps-section">
+    <h2 class="steps-title">💧 Steps to Easy Water</h2>
+    <div class="steps-grid">
 
-<div class="container">
+      <div class="step-card">
+        <div class="step-icon">🧾</div>
+        <h3 class="step-title">Pick your plan</h3>
+        <p class="step-desc">Choose a term or annual subscription and sign up in seconds.</p>
+      </div>
 
-  <!-- QUARTERLY -->
-  <div class="card">
-    <h2>Quarterly subscription 🔁</h2>
-    <p><strong>R390 / term</strong></p>
+      <div class="step-card">
+        <div class="step-icon">🚚</div>
+        <h3 class="step-title">The Monday drop</h3>
+        <p class="step-desc">Your first 20L tank arrives this Monday — we swap it weekly while your subscription is active.</p>
+      </div>
 
-    <form action="https://www.payfast.co.za/eng/process" method="post">
+      <div class="step-card">
+        <div class="step-icon">💸</div>
+        <h3 class="step-title">Pay for what you use</h3>
+        <p class="step-desc">Sign up mid-term? Missed weeks are automatically credited as a rebate on your next subscription.</p>
+      </div>
 
-      <!-- PAYFAST HOSTED -->
-      <input type="hidden" name="cmd" value="_paynow">
-      <input type="hidden" name="receiver" value="21742448">
-      <input type="hidden" name="amount" value="390">
-      <input type="hidden" name="item_name" value="Drop&Go Quarterly Subscription">
-
-      <input type="hidden" name="subscription_type" value="1">
-      <input type="hidden" name="recurring_amount" value="390">
-      <input type="hidden" name="frequency" value="4">
-      <input type="hidden" name="cycles" value="0">
-
-      <!-- REQUIRED USER INPUT -->
-      <input class="form-input" name="name_first"
-             placeholder="Name_Surname (e.g. Hugo_Radley)" required>
-
-      <input class="form-input" name="custom_str1"
-             placeholder="Residence_Section_RoomNr (e.g. Dagbreek_6_7)" required>
-
-      <input class="form-input" name="cell_number"
-             placeholder="PhoneNr (e.g. 0825233426)" required>
-
-      <input type="image"
-             src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
-             alt="Subscribe Quarterly">
-    </form>
+    </div>
   </div>
 
-  <!-- ANNUAL -->
-  <div class="card highlight">
-    <h2>Annual subscription ⭐</h2>
-    <p><strong>R1280 / year</strong></p>
+  <!-- Subscription cards -->
+  <div class="container">
 
-    <form action="https://www.payfast.co.za/eng/process" method="post">
+    <!-- QUARTERLY SUBSCRIPTION -->
+    <div class="card">
+      <h2>Quarterly subscription 🔁</h2>
+      <div class="price">R390 / term</div>
+      <p>R390 billed once per term</p>
 
-      <input type="hidden" name="cmd" value="_paynow">
-      <input type="hidden" name="receiver" value="21742448">
-      <input type="hidden" name="amount" value="1280">
-      <input type="hidden" name="item_name" value="Drop&Go Annual Subscription">
+      <form action="https://www.payfast.co.za/eng/process" method="post">
+        <input type="hidden" name="cmd" value="_paynow">
+        <input type="hidden" name="receiver" value="21742448">
+        <input type="hidden" name="amount" value="390">
+        <input type="hidden" name="item_name" value="Drop&Go Quarterly Subscription">
 
-      <input type="hidden" name="subscription_type" value="1">
-      <input type="hidden" name="recurring_amount" value="1280">
-      <input type="hidden" name="frequency" value="6">
-      <input type="hidden" name="cycles" value="0">
+        <input type="hidden" name="subscription_type" value="1">
+        <input type="hidden" name="recurring_amount" value="390">
+        <input type="hidden" name="frequency" value="4">
+        <input type="hidden" name="cycles" value="0">
 
-      <input class="form-input" name="name_first"
-             placeholder="Name_Surname (e.g. Hugo_Radley)" required>
+        <!-- Required user fields -->
+        <input class="form-input" type="text"
+               name="name_first"
+               placeholder="Name_Surname (e.g. Hugo_Radley)"
+               required>
 
-      <input class="form-input" name="custom_str1"
-             placeholder="Residence_Section_RoomNr (e.g. Dagbreek_6_7)" required>
+        <input class="form-input" type="text"
+               name="custom_str1"
+               placeholder="Residence_Section_RoomNr (e.g. Dagbreek_6_7)"
+               required>
 
-      <input class="form-input" name="cell_number"
-             placeholder="PhoneNr (e.g. 0825233426)" required>
+        <input class="form-input" type="tel"
+               name="cell_number"
+               placeholder="PhoneNr (e.g. 0825233426)"
+               required>
 
-      <input type="image"
-             src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
-             alt="Subscribe Annually">
-    </form>
+        <input type="image"
+               src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
+               alt="Subscribe Quarterly with PayFast">
+      </form>
+
+      <p style="font-size:12px;">Secure payment via PayFast</p>
+    </div>
+
+    <!-- ANNUAL SUBSCRIPTION -->
+    <div class="card highlight">
+      <h2>Annual subscription ⭐</h2>
+      <div class="price">R1280 / year</div>
+      <p>R320/term · Save 18%</p>
+
+      <form action="https://www.payfast.co.za/eng/process" method="post">
+        <input type="hidden" name="cmd" value="_paynow">
+        <input type="hidden" name="receiver" value="21742448">
+        <input type="hidden" name="amount" value="1280">
+        <input type="hidden" name="item_name" value="Drop&Go Annual Subscription">
+
+        <input type="hidden" name="subscription_type" value="1">
+        <input type="hidden" name="recurring_amount" value="1280">
+        <input type="hidden" name="frequency" value="6">
+        <input type="hidden" name="cycles" value="0">
+
+        <!-- Required user fields -->
+        <input class="form-input" type="text"
+               name="name_first"
+               placeholder="Name_Surname (e.g. Hugo_Radley)"
+               required>
+
+        <input class="form-input" type="text"
+               name="custom_str1"
+               placeholder="Residence_Section_RoomNr (e.g. Dagbreek_6_7)"
+               required>
+
+        <input class="form-input" type="tel"
+               name="cell_number"
+               placeholder="PhoneNr (e.g. 0825233426)"
+               required>
+
+        <input type="image"
+               src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png"
+               alt="Subscribe Annually with PayFast">
+      </form>
+
+      <p style="font-size:12px;">Secure payment via PayFast</p>
+    </div>
+
   </div>
 
-</div>
+  <!-- WhatsApp support -->
+  <a class="btn-whatsapp"
+     href="https://wa.me/825233426?text=Hi%20I%20need%20help%20with%20Drop%26Go%20subscriptions"
+     target="_blank">
+    Chat with us on WhatsApp
+  </a>
 
 </body>
 </html>
