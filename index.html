@@ -2,162 +2,263 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Drop&Go Water Subscription</title>
+  <title>Drop&Go Water | Effortless Hydration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    :root {
+      --primary: #0077b6;
+      --accent: #2a9d8f;
+      --bg: #f0f7fa;
+      --card-bg: rgba(255, 255, 255, 0.9);
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: #f4f6f8;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
       margin: 0;
-      padding: 30px 15px;
-      text-align: center;
+      padding: 40px 20px;
+      color: #2d3436;
+      line-height: 1.6;
     }
 
-    h1 { margin-top: 0; color: #333; font-size: 2.2rem; }
-    .subtitle { color: #666; font-weight: bold; margin-bottom: 30px; font-size: 1.1rem; }
+    h1 { 
+      font-size: 2.8rem; 
+      margin-bottom: 10px; 
+      color: #023e8a;
+      letter-spacing: -1px;
+    }
 
-    /* Steps Section */
-    .steps-container {
+    .subtitle { 
+      font-size: 1.2rem;
+      color: #0077b6;
+      margin-bottom: 50px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Aesthetic Steps Section */
+    .steps-wrapper {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+      gap: 30px;
       flex-wrap: wrap;
-      max-width: 950px;
-      margin: 0 auto 45px auto;
-      gap: 15px;
+      max-width: 1000px;
+      margin: 0 auto 60px auto;
     }
 
-    .step-box {
+    .step-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 30px;
+      border-radius: 24px;
       flex: 1 1 280px;
-      background: #ffffff;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border-bottom: 4px solid #00aaff;
+      box-shadow: 0 10px 30px rgba(0, 119, 182, 0.08);
+      transition: transform 0.3s ease;
       text-align: left;
     }
 
-    .step-number {
-      display: inline-block;
-      background: #00aaff;
+    .step-card:hover { transform: translateY(-5px); }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .step-num {
+      background: var(--primary);
       color: white;
-      width: 28px;
-      height: 28px;
-      line-height: 28px;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 50%;
       font-weight: bold;
-      margin-bottom: 15px;
-      text-align: center;
+      margin-right: 15px;
+      box-shadow: 0 4px 10px rgba(0, 119, 182, 0.3);
     }
 
-    .step-box h3 { margin: 0 0 10px 0; color: #0077b6; font-size: 1.2rem; }
-    .step-box p { font-size: 0.95rem; color: #555; line-height: 1.5; margin: 0; }
+    .step-card h3 { 
+      margin: 0; 
+      color: #03045e; 
+      font-size: 1.25rem;
+    }
 
-    /* Pricing Cards */
+    .step-card p { 
+      font-size: 0.95rem; 
+      color: #555; 
+      margin: 10px 0 0 0;
+    }
+
+    /* Pricing Section */
     .container {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 25px;
+      gap: 30px;
+      flex-wrap: wrap;
     }
 
-    .card {
+    .pricing-card {
       background: white;
-      max-width: 340px;
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      flex: 1 1 300px;
+      padding: 40px;
+      border-radius: 30px;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
     }
 
-    .card h2 { margin-top: 0; font-size: 1.4rem; color: #333; }
-    .price { font-size: 28px; font-weight: bold; margin: 15px 0; color: #2a9d8f; }
-    .highlight { background: #f0faff; border: 2px solid #00aaff; transform: scale(1.02); }
+    .pricing-card.best-value {
+      border: 2px solid var(--primary);
+      background: #fdfdfd;
+      transform: scale(1.05);
+    }
 
-    .form-field {
+    .badge {
+      position: absolute;
+      top: 20px;
+      right: -30px;
+      background: var(--primary);
+      color: white;
+      padding: 5px 40px;
+      transform: rotate(45deg);
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .price-tag {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 20px 0;
+    }
+
+    .form-input {
       width: 100%;
       box-sizing: border-box;
-      padding: 12px;
+      padding: 14px;
       margin-bottom: 12px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 14px;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      background: #f9f9f9;
+      transition: border 0.3s;
     }
 
-    .btn-whatsapp {
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .whatsapp-btn {
       display: inline-block;
-      margin-top: 40px;
-      padding: 14px 28px;
+      margin-top: 50px;
+      padding: 16px 32px;
       background: #25D366;
       color: white;
-      border-radius: 10px;
+      border-radius: 50px;
       text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+      transition: all 0.3s;
     }
 
-    input[type="image"] { max-width: 100%; height: auto; margin-top: 15px; }
-    .secure-text { font-size: 12px; color: #aaa; margin-top: 10px; }
+    .whatsapp-btn:hover {
+      background: #1ebe57;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.3);
+    }
+
+    input[type="image"] {
+      width: 100%;
+      height: auto;
+      margin-top: 10px;
+      transition: opacity 0.2s;
+    }
+
+    input[type="image"]:hover { opacity: 0.9; }
+
+    @media (max-width: 768px) {
+      .pricing-card.best-value { transform: scale(1); }
+      h1 { font-size: 2.2rem; }
+    }
   </style>
 </head>
 <body>
 
   <h1>Drop&Go Water 💧</h1>
-  <p class="subtitle">Your Journey to Easy Hydration</p>
+  <div class="subtitle">Steps to Easy Hydration</div>
 
-  <div class="steps-container">
-    <div class="step-box">
-      <div class="step-number">1</div>
-      <h3>Pick Your Plan</h3>
-      <p>Choose a term or annual subscription below and sign up in seconds.</p>
+  <div class="steps-wrapper">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <h3>Pick Your Plan</h3>
+      </div>
+      <p>Choose between a term or discounted annual subscription and sign up in seconds.</p>
     </div>
 
-    <div class="step-box">
-      <div class="step-number">2</div>
-      <h3>The Monday Drop</h3>
-      <p>Receive your first 20L tank this Monday—we’ll swap it for a fresh one every week as long as you have a subscription.</p>
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <h3>The Monday Drop</h3>
+      </div>
+      <p>Get your first 20L tank this Monday—we’ll swap it for a fresh one every week as long as you're subscribed.</p>
     </div>
 
-    <div class="step-box">
-      <div class="step-number">3</div>
-      <h3>Pay for What You Use</h3>
-      <p>If you sign up mid-term, the weeks you missed are automatically credited as a rebate toward your next subscription.</p>
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <h3>Pay for What You Use</h3>
+      </div>
+      <p>Starting late? Any weeks missed before sign-up are automatically credited toward your next cycle.</p>
     </div>
   </div>
 
   <div class="container">
-    <div class="card">
-      <h2>Quarterly Subscription 🔁</h2>
-      <div class="price">R390 / term</div>
+    <div class="pricing-card">
+      <h2>Quarterly</h2>
+      <div class="price-tag">R390 <span style="font-size: 1rem; color: #999;">/ term</span></div>
+      
       <form action="https://payment.payfast.io/eng/process" method="post">
         <input type="hidden" name="receiver" value="21742448">
         <input type="hidden" name="amount" value="390">
         <input type="hidden" name="item_name" value="DropAndGo Quarterly Subscription">
-        <input class="form-field" type="text" name="name_first" placeholder="Name_Surname" required>
-        <input class="form-field" type="text" name="custom_str1" placeholder="Residence_RoomNr" required>
-        <input class="form-field" type="tel" name="cell_number" placeholder="PhoneNr" required>
+        
+        <input class="form-input" type="text" name="name_first" placeholder="Name & Surname" required>
+        <input class="form-input" type="text" name="custom_str1" placeholder="Residence & Room Nr" required>
+        <input class="form-input" type="tel" name="cell_number" placeholder="Phone Number" required>
+        
         <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png">
       </form>
-      <div class="secure-text">Secure via PayFast</div>
+      <p style="font-size: 11px; color: #bbb; margin-top: 15px;">Securely processed by PayFast</p>
     </div>
 
-    <div class="card highlight">
-      <h2>Annual Subscription ⭐</h2>
-      <div class="price">R1280 / year</div>
+    <div class="pricing-card best-value">
+      <div class="badge">SAVE 18%</div>
+      <h2>Annual</h2>
+      <div class="price-tag">R1280 <span style="font-size: 1rem; color: #999;">/ year</span></div>
+      
       <form action="https://payment.payfast.io/eng/process" method="post">
         <input type="hidden" name="receiver" value="21742448">
         <input type="hidden" name="amount" value="1280">
         <input type="hidden" name="item_name" value="DropAndGo Annual Subscription">
-        <input class="form-field" type="text" name="name_first" placeholder="Name_Surname" required>
-        <input class="form-field" type="text" name="custom_str1" placeholder="Residence_RoomNr" required>
-        <input class="form-field" type="tel" name="cell_number" placeholder="PhoneNr" required>
+        
+        <input class="form-input" type="text" name="name_first" placeholder="Name & Surname" required>
+        <input class="form-input" type="text" name="custom_str1" placeholder="Residence & Room Nr" required>
+        <input class="form-input" type="tel" name="cell_number" placeholder="Phone Number" required>
+        
         <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png">
       </form>
-      <div class="secure-text">Save 18% · Secure via PayFast</div>
+      <p style="font-size: 11px; color: #bbb; margin-top: 15px;">Equivalent to R320 per term</p>
     </div>
   </div>
 
-  <a class="btn-whatsapp" href="https://wa.me/27825233426?text=Hi%20Drop%26Go" target="_blank">
+  <a class="whatsapp-btn" href="https://wa.me/27825233426?text=Hi%20Drop%26Go" target="_blank">
     Need help? Chat on WhatsApp
   </a>
 
