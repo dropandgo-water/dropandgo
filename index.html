@@ -14,7 +14,36 @@
       text-align: center;
     }
 
-    h1 { margin-top: 0; }
+    h1 { margin-top: 0; color: #333; }
+
+    /* Styling for the new explanatory section */
+    .info-box {
+      max-width: 650px;
+      margin: 0 auto 30px auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      text-align: left; /* Aligns bullets for better readability */
+    }
+
+    .info-box p {
+      text-align: center;
+      font-weight: bold;
+      color: #0077b6;
+      margin-bottom: 20px;
+    }
+
+    .how-it-works {
+      color: #555;
+      line-height: 1.6;
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .how-it-works li {
+      margin-bottom: 12px;
+    }
 
     .container {
       display: flex;
@@ -33,11 +62,12 @@
     }
 
     .card h2 { margin-top: 0; margin-bottom: 10px; }
-    .price { font-size: 22px; font-weight: bold; margin-bottom: 10px; }
+    .price { font-size: 22px; font-weight: bold; margin-bottom: 10px; color: #2a9d8f; }
     .highlight { background: #e6f7ff; border: 2px solid #00aaff; }
 
     .form-field {
       width: 100%;
+      box-sizing: border-box; /* Prevents fields from overflowing card */
       padding: 10px;
       margin-bottom: 10px;
       border-radius: 8px;
@@ -47,8 +77,8 @@
 
     .btn-whatsapp {
       display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
+      margin-top: 30px;
+      padding: 12px 24px;
       background: #25D366;
       color: white;
       border-radius: 8px;
@@ -59,18 +89,31 @@
     .btn-whatsapp:hover { opacity: 0.85; }
 
     p { color: #555; line-height: 1.5; margin-top: 0; margin-bottom: 15px; }
+
+    input[type="image"] {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
   <h1>Drop&Go Water 💧</h1>
-  <p>20L filtered water delivered weekly straight to your door</p>
+
+  <div class="info-box">
+    <p>20L filtered water delivered weekly straight to your door</p>
+    <ul class="how-it-works">
+      <li><strong>The Monday Refresh:</strong> We bring the Cape’s best to your door with 20L of filtered water, sourced from a farm spring near Franschhoek and delivered every Monday.</li>
+      <li><strong>Effortless Swaps:</strong> We drop off a fresh tank and collect your empty one each week—all seamlessly included in your choice of a term or discounted annual subscription.</li>
+      <li><strong>Flexible Value:</strong> Join whenever you’re ready; if you sign up mid-term, we automatically convert any missed weeks into a rebate for your next cycle.</li>
+    </ul>
+  </div>
 
   <div class="container">
 
-    <!-- Quarterly subscription -->
     <div class="card">
-      <h2>Quarterly subscription 🔁</h2>
+      <h2>Quarterly Subscription 🔁</h2>
       <div class="price">R390 / term</div>
       <p>R390/term (billed once per term)</p>
 
@@ -84,7 +127,6 @@
         <input type="hidden" name="cycles" value="0">
         <input type="hidden" name="frequency" value="4">
 
-        <!-- REQUIRED USER FIELDS -->
         <input class="form-field" type="text" name="name_first"
           placeholder="Name_Surname (e.g. Hugo_Radley)" required>
 
@@ -99,14 +141,13 @@
           alt="Subscribe Quarterly with PayFast">
       </form>
 
-      <p style="font-size: 12px;">Secure payment via PayFast</p>
+      <p style="font-size: 12px; margin-top: 10px;">Secure payment via PayFast</p>
     </div>
 
-    <!-- Annual subscription -->
     <div class="card highlight">
-      <h2>Annual subscription ⭐</h2>
+      <h2>Annual Subscription ⭐</h2>
       <div class="price">R1280 / year</div>
-      <p>R320/term (R1280 billed once annually) · Save 18%</p>
+      <p>R320/term (R1280 billed once annually) · <strong>Save 18%</strong></p>
 
       <form action="https://payment.payfast.io/eng/process" method="post">
         <input type="hidden" name="cmd" value="_paynow">
@@ -118,7 +159,6 @@
         <input type="hidden" name="cycles" value="0">
         <input type="hidden" name="frequency" value="6">
 
-        <!-- REQUIRED USER FIELDS -->
         <input class="form-field" type="text" name="name_first"
           placeholder="Name_Surname (e.g. Hugo_Radley)" required>
 
@@ -133,16 +173,18 @@
           alt="Subscribe Annually with PayFast">
       </form>
 
-      <p style="font-size: 12px;">Secure payment via PayFast</p>
+      <p style="font-size: 12px; margin-top: 10px;">Secure payment via PayFast</p>
     </div>
 
   </div>
 
-  <a class="btn-whatsapp"
-     href="https://wa.me/825233426?text=Hi%20I%20need%20help%20with%20Drop%26Go%20subscriptions"
-     target="_blank">
-    Chat with us on WhatsApp
-  </a>
+  <div>
+    <a class="btn-whatsapp"
+       href="https://wa.me/27825233426?text=Hi%20I%20need%20help%20with%20Drop%26Go%20subscriptions"
+       target="_blank">
+      Chat with us on WhatsApp
+    </a>
+  </div>
 
 </body>
 </html>
