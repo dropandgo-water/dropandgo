@@ -7,80 +7,78 @@
 
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background: #f4f6f8;
       margin: 0;
       padding: 30px 15px;
       text-align: center;
     }
 
-    h1 { margin-top: 0; color: #2c3e50; font-size: 2.2rem; }
+    h1 { margin-top: 0; color: #333; font-size: 2.2rem; }
+    .subtitle { color: #666; font-weight: bold; margin-bottom: 30px; font-size: 1.1rem; }
 
-    /* Creative replacement for the tagline section */
-    .how-it-works-container {
-      max-width: 700px;
-      margin: 25px auto 40px auto;
+    /* Steps Section */
+    .steps-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 950px;
+      margin: 0 auto 45px auto;
+      gap: 15px;
+    }
+
+    .step-box {
+      flex: 1 1 280px;
       background: #ffffff;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-bottom: 4px solid #00aaff;
       text-align: left;
     }
 
-    .step {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 20px;
+    .step-number {
+      display: inline-block;
+      background: #00aaff;
+      color: white;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      border-radius: 50%;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;
     }
 
-    .step:last-child { margin-bottom: 0; }
+    .step-box h3 { margin: 0 0 10px 0; color: #0077b6; font-size: 1.2rem; }
+    .step-box p { font-size: 0.95rem; color: #555; line-height: 1.5; margin: 0; }
 
-    .step-icon {
-      font-size: 24px;
-      margin-right: 15px;
-      background: #e6f7ff;
-      padding: 10px;
-      border-radius: 12px;
-    }
-
-    .step-text h3 {
-      margin: 0 0 5px 0;
-      color: #0077b6;
-      font-size: 1.1rem;
-    }
-
-    .step-text p {
-      margin: 0;
-      color: #555;
-      line-height: 1.5;
-      font-size: 0.95rem;
-    }
-
+    /* Pricing Cards */
     .container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
     }
 
     .card {
       background: white;
-      max-width: 320px;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      flex: 1 1 280px;
+      max-width: 340px;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      flex: 1 1 300px;
     }
 
-    .card h2 { margin-top: 0; margin-bottom: 10px; font-size: 1.3rem; }
-    .price { font-size: 24px; font-weight: bold; margin-bottom: 10px; color: #2a9d8f; }
-    .highlight { border: 2px solid #00aaff; background: #f0faff; }
+    .card h2 { margin-top: 0; font-size: 1.4rem; color: #333; }
+    .price { font-size: 28px; font-weight: bold; margin: 15px 0; color: #2a9d8f; }
+    .highlight { background: #f0faff; border: 2px solid #00aaff; transform: scale(1.02); }
 
     .form-field {
       width: 100%;
       box-sizing: border-box;
       padding: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       border-radius: 8px;
       border: 1px solid #ddd;
       font-size: 14px;
@@ -88,115 +86,79 @@
 
     .btn-whatsapp {
       display: inline-block;
-      margin-top: 30px;
-      padding: 12px 25px;
+      margin-top: 40px;
+      padding: 14px 28px;
       background: #25D366;
       color: white;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
+      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
     }
 
-    .btn-whatsapp:hover { background: #1ebe57; }
-    
-    .payfast-footer {
-      font-size: 11px;
-      color: #999;
-      margin-top: 10px;
-    }
-
-    input[type="image"] {
-      max-width: 100%;
-      height: auto;
-      margin-top: 5px;
-    }
+    input[type="image"] { max-width: 100%; height: auto; margin-top: 15px; }
+    .secure-text { font-size: 12px; color: #aaa; margin-top: 10px; }
   </style>
 </head>
 <body>
 
   <h1>Drop&Go Water 💧</h1>
+  <p class="subtitle">Your Journey to Easy Hydration</p>
 
-  <div class="how-it-works-container">
-    <div class="step">
-      <div class="step-icon">🚚</div>
-      <div class="step-text">
-        <h3>The Monday Refresh</h3>
-        <p>We bring the Cape’s best to your door with 20L of filtered water, sourced from a farm spring near Franschhoek and delivered every Monday.</p>
-      </div>
+  <div class="steps-container">
+    <div class="step-box">
+      <div class="step-number">1</div>
+      <h3>Pick Your Plan</h3>
+      <p>Choose a term or annual subscription below and sign up in seconds.</p>
     </div>
 
-    <div class="step">
-      <div class="step-icon">🔄</div>
-      <div class="step-text">
-        <h3>Effortless Swaps</h3>
-        <p>We drop off a fresh tank and collect your empty one each week—all seamlessly included in your choice of a term or discounted annual subscription.</p>
-      </div>
+    <div class="step-box">
+      <div class="step-number">2</div>
+      <h3>The Monday Drop</h3>
+      <p>Receive your first 20L tank this Monday—we’ll swap it for a fresh one every week as long as you have a subscription.</p>
     </div>
 
-    <div class="step">
-      <div class="step-icon">💎</div>
-      <div class="step-text">
-        <h3>Flexible Value</h3>
-        <p>Join whenever you’re ready; if you sign up mid-term, we automatically convert any missed weeks into a rebate for your next cycle.</p>
-      </div>
+    <div class="step-box">
+      <div class="step-number">3</div>
+      <h3>Pay for What You Use</h3>
+      <p>If you sign up mid-term, the weeks you missed are automatically credited as a rebate toward your next subscription.</p>
     </div>
   </div>
 
   <div class="container">
-
     <div class="card">
       <h2>Quarterly Subscription 🔁</h2>
       <div class="price">R390 / term</div>
-      <p style="font-size: 0.9rem;">Billed once per term</p>
-
       <form action="https://payment.payfast.io/eng/process" method="post">
-        <input type="hidden" name="cmd" value="_paynow">
         <input type="hidden" name="receiver" value="21742448">
         <input type="hidden" name="amount" value="390">
         <input type="hidden" name="item_name" value="DropAndGo Quarterly Subscription">
-        <input type="hidden" name="subscription_type" value="1">
-        <input type="hidden" name="recurring_amount" value="390">
-        <input type="hidden" name="cycles" value="0">
-        <input type="hidden" name="frequency" value="4">
-
-        <input class="form-field" type="text" name="name_first" placeholder="Name_Surname (e.g. Hugo_Radley)" required>
-        <input class="form-field" type="text" name="custom_str1" placeholder="Residence_RoomNr (e.g. Dagbreek_6_7)" required>
-        <input class="form-field" type="tel" name="cell_number" placeholder="PhoneNr (e.g. 0825233426)" required>
-
-        <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png" alt="Subscribe">
+        <input class="form-field" type="text" name="name_first" placeholder="Name_Surname" required>
+        <input class="form-field" type="text" name="custom_str1" placeholder="Residence_RoomNr" required>
+        <input class="form-field" type="tel" name="cell_number" placeholder="PhoneNr" required>
+        <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png">
       </form>
-      <div class="payfast-footer">Secure payment via PayFast</div>
+      <div class="secure-text">Secure via PayFast</div>
     </div>
 
     <div class="card highlight">
       <h2>Annual Subscription ⭐</h2>
       <div class="price">R1280 / year</div>
-      <p style="font-size: 0.9rem;">R320/term (Billed annually) · <strong>Save 18%</strong></p>
-
       <form action="https://payment.payfast.io/eng/process" method="post">
-        <input type="hidden" name="cmd" value="_paynow">
         <input type="hidden" name="receiver" value="21742448">
         <input type="hidden" name="amount" value="1280">
         <input type="hidden" name="item_name" value="DropAndGo Annual Subscription">
-        <input type="hidden" name="subscription_type" value="1">
-        <input type="hidden" name="recurring_amount" value="1280">
-        <input type="hidden" name="cycles" value="0">
-        <input type="hidden" name="frequency" value="6">
-
-        <input class="form-field" type="text" name="name_first" placeholder="Name_Surname (e.g. Hugo_Radley)" required>
-        <input class="form-field" type="text" name="custom_str1" placeholder="Residence_RoomNr (e.g. Dagbreek_6_7)" required>
-        <input class="form-field" type="tel" name="cell_number" placeholder="PhoneNr (e.g. 0825233426)" required>
-
-        <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png" alt="Subscribe">
+        <input class="form-field" type="text" name="name_first" placeholder="Name_Surname" required>
+        <input class="form-field" type="text" name="custom_str1" placeholder="Residence_RoomNr" required>
+        <input class="form-field" type="tel" name="cell_number" placeholder="PhoneNr" required>
+        <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Primary-Large-Subscribe.png">
       </form>
-      <div class="payfast-footer">Secure payment via PayFast</div>
+      <div class="secure-text">Save 18% · Secure via PayFast</div>
     </div>
-
   </div>
 
-  <a class="btn-whatsapp" href="https://wa.me/27825233426?text=Hi%20I%20need%20help%20with%20Drop%26Go" target="_blank">
-    Chat with us on WhatsApp
+  <a class="btn-whatsapp" href="https://wa.me/27825233426?text=Hi%20Drop%26Go" target="_blank">
+    Need help? Chat on WhatsApp
   </a>
 
 </body>
