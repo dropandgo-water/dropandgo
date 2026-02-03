@@ -18,8 +18,40 @@
     h1.main-title {
       font-size: 38px;
       color: #0077cc;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       letter-spacing: 1px;
+    }
+
+    /* Water Info Section */
+    .water-info {
+      max-width:700px; 
+      margin:20px auto; 
+      background: linear-gradient(135deg, #e0f7fa, #ffffff); 
+      padding:25px; 
+      border-radius:20px; 
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+      text-align:left;
+    }
+
+    .water-info h2 {
+      text-align:center; 
+      font-size:28px; 
+      color:#00aaff; 
+      margin-bottom:15px; 
+      line-height:1.2;
+    }
+
+    .water-info ul {
+      padding-left:20px; 
+      margin:0; 
+      list-style:none; 
+      color:#0077cc; 
+      font-size:16px; 
+      line-height:1.8;
+    }
+
+    .water-info ul li {
+      margin-bottom:12px;
     }
 
     .container {
@@ -78,51 +110,6 @@
     }
 
     .btn-whatsapp:hover { opacity: 0.85; }
-
-    /* Steps Section */
-    .steps-section {
-      max-width:900px;
-      margin:25px auto 35px auto;
-      text-align:center;
-    }
-
-    .steps-title {
-      margin-bottom:20px;
-      font-size:26px;
-      color: #0077cc;
-    }
-
-    .steps-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:18px;
-    }
-
-    .step-card {
-      background:#ffffff;
-      padding:20px;
-      border-radius:16px;
-      box-shadow:0 10px 25px rgba(0,0,0,0.08);
-    }
-
-    .step-icon {
-      font-size:34px;
-      margin-bottom:10px;
-      color:#0077cc;
-      font-weight:bold;
-    }
-
-    .step-title {
-      margin:0 0 8px 0;
-      font-size:18px;
-      color:#333;
-    }
-
-    .step-desc {
-      margin:0;
-      color:#555;
-      font-size:14px;
-    }
   </style>
 </head>
 <body>
@@ -130,30 +117,14 @@
   <!-- Main Title -->
   <h1 class="main-title">Drop&amp;Go Water 💧</h1>
 
-  <!-- Steps Section -->
-  <div class="steps-section">
-    <h2 class="steps-title">Knock Knock. It's your water!</h2>
-    <div class="steps-grid">
-
-      <div class="step-card">
-        <div class="step-icon">1</div>
-        <h3 class="step-title">Pick your plan</h3>
-        <p class="step-desc">Choose a term or annual subscription and sign up in seconds.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-icon">2</div>
-        <h3 class="step-title">The Monday drop</h3>
-        <p class="step-desc">Your first 20L tank arrives this Monday — we swap it weekly while your subscription is active.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-icon">3</div>
-        <h3 class="step-title">Pay for what you use</h3>
-        <p class="step-desc">Sign up mid-term? Missed weeks are automatically credited as a rebate on your next subscription.</p>
-      </div>
-
-    </div>
+  <!-- Condensed Water Info Section -->
+  <div class="water-info">
+    <h2>Knock Knock. It's your water!</h2>
+    <ul>
+      <li>1. <strong>Pick your plan:</strong> Choose a term or annual subscription and sign up in seconds.</li>
+      <li>2. <strong>The Monday drop:</strong> Receive your first 20L tank this Monday — we swap it weekly while your subscription is active.</li>
+      <li>3. <strong>Pay for what you use:</strong> Sign up mid-term? Missed weeks are automatically credited as a rebate on your next subscription.</li>
+    </ul>
   </div>
 
   <!-- Subscription Cards -->
