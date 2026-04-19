@@ -140,9 +140,8 @@
 
     /* ── PLANS ── */
     .plans {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+      display: flex;
+      justify-content: center;
       margin-bottom: 48px;
     }
 
@@ -355,7 +354,6 @@
     }
     .toggle-grid input[type="radio"]:checked + .toggle-option .toggle-freq { color: var(--cyan); }
     .plan-desc { margin-bottom: 20px; }
-    .plans { justify-content: center; }
     .plans .plan-card { max-width: 520px; width: 100%; }
 
     @media (max-width: 480px) {
