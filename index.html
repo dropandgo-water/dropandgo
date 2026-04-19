@@ -57,7 +57,7 @@
     /* ── LOGO ── */
     .nav-badge {
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 48px;
+      margin-bottom: 20px;
     }
     .logo-img {
       width: 120px; height: 120px;
@@ -168,7 +168,8 @@
       background: linear-gradient(135deg, rgba(0,102,255,0.08), rgba(0,200,255,0.05));
     }
     .plan-card.featured::before {
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.7), rgba(255,255,255,0.15));
+      height: 2px;
     }
 
     .badge {
@@ -228,6 +229,7 @@
       outline: none;
     }
     .form-input::placeholder { color: rgba(255,255,255,0.22); }
+    select.form-input { height: 46px; appearance: none; -webkit-appearance: none; }
     select.form-input option { background: #0a1628; color: var(--white); }
     .form-input:focus {
       border-color: rgba(0,200,255,0.5);
@@ -277,6 +279,88 @@
       text-transform: uppercase; color: var(--cyan);
     }
     .trust-item span { font-size: 13px; }
+
+
+
+
+    .toggle-option { position: relative; overflow: hidden; }
+    .toggle-ribbon {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      text-align: center;
+      font-size: 8px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 0;
+    }
+    .toggle-ribbon.popular {
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      color: white;
+    }
+    .toggle-ribbon.trial {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.4);
+    }
+
+    .section-heading {
+      text-align: center;
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+
+    /* ── TOGGLE GRID ── */
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .toggle-grid input[type="radio"] { display: none; }
+
+    .toggle-option {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 4px;
+      padding: 14px 8px 22px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .toggle-option:hover {
+      border-color: rgba(0,200,255,0.35);
+      background: rgba(0,200,255,0.06);
+    }
+    .toggle-grid input[type="radio"]:checked + .toggle-option {
+      border-color: var(--cyan);
+      background: linear-gradient(135deg, rgba(0,102,255,0.18), rgba(0,200,255,0.12));
+      box-shadow: 0 0 18px rgba(0,200,255,0.2);
+    }
+    .toggle-size {
+      font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .toggle-freq {
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .toggle-price {
+      font-size: 13px; font-weight: 700; color: var(--white);
+      margin-top: 2px;
+    }
+    .toggle-grid input[type="radio"]:checked + .toggle-option .toggle-freq { color: var(--cyan); }
+    .plan-desc { margin-bottom: 20px; }
+    .plans { justify-content: center; }
+    .plans .plan-card { max-width: 520px; width: 100%; }
+
+    @media (max-width: 480px) {
+      .toggle-grid { grid-template-columns: 1fr 1fr; }
+    }
 
     /* ── WHATSAPP ── */
     .support-section { text-align: center; }
@@ -338,111 +422,94 @@
 
   <!-- Trust Bar -->
   <div class="trust-bar fade-2">
-    <div class="trust-item"><span>💧</span> Sourced from WATER@NEELSIE</div>
-    <div class="trust-item"><span>🚪</span> Delivered to your room every Saturday</div>
-    <div class="trust-item"><span>🚰</span> Tank included</div>
+    <div class="trust-item"><span>✅</span> Purified, Tested &amp; Certified — Reverse Osmosis Drinking Water</div>
+    <div class="trust-item"><span>💧</span> Delivered to your room every Saturday</div>
+    <div class="trust-item"><span>♻️</span> Reusable Tank — Cleaned &amp; Swapped Weekly</div>
   </div>
 
 
 
   <!-- Plans -->
+  <div class="section-heading fade-4">CHOOSE YOUR PLAN:</div>
   <div class="plans fade-4">
-
-    <!-- 10L Plan -->
-    <div class="plan-card">
-      <div class="plan-size-label">10L / WEEK</div>
-      <div class="plan-title">Subscription</div>
-      <div class="plan-subtitle">Half tank · For light individual water drinkers</div>
-      <div class="plan-price">
-        <span class="price-currency">R</span>
-        <span class="price-amount">299</span>
-        <span class="price-term">/ term</span>
-      </div>
-      <div class="price-note">Billed once per quarter</div>
-      <div class="divider"></div>
-
-      <form action="https://www.payfast.co.za/eng/process" method="post">
-        <input type="hidden" name="cmd" value="_paynow">
-        <input type="hidden" name="receiver" value="21742448">
-        <input type="hidden" name="amount" value="299">
-        <input type="hidden" name="item_name" value="Drop&Go 10L Quarterly Subscription">
-        <input type="hidden" name="subscription_type" value="1">
-        <input type="hidden" name="recurring_amount" value="299">
-        <input type="hidden" name="frequency" value="4">
-        <input type="hidden" name="cycles" value="0">
-
-        <label class="form-label">Full name</label>
-        <input class="form-input" type="text" name="name_first" placeholder="e.g. Hugo Radley" required>
-
-        <label class="form-label">Residence</label>
-        <select class="form-input" name="custom_str2" required>
-          <option value="" disabled selected>Select residence</option>
-          <option value="Dagbreek">Dagbreek</option>
-          <option value="Irene">Irene</option>
-        </select>
-
-                <label class="form-label">Section Nr / Name</label>
-        <input class="form-input" type="text" name="custom_str3" placeholder="e.g. 6 - Sukses" required>
-
-                <label class="form-label">Room details</label>
-        <input class="form-input" type="text" name="custom_str1" placeholder="e.g. 7" required>
-
-        <label class="form-label">Phone number</label>
-        <input class="form-input" type="tel" name="cell_number" placeholder="e.g. 0825233426" required>
-
-        <button type="submit" class="btn-subscribe">Subscribe — R299 / term →</button>
-      </form>
-      <div class="secure-note">Secured by PayFast</div>
-    </div>
-
-    <!-- 20L Plan -->
     <div class="plan-card featured">
-      <div class="badge">Most popular</div>
-      <div class="plan-size-label">20L / WEEK</div>
-      <div class="plan-title">Subscription</div>
-      <div class="plan-subtitle">Full tank · For regular water drinkers OR sharing between roommates</div>
-      <div class="plan-price">
-        <span class="price-currency">R</span>
-        <span class="price-amount">499</span>
-        <span class="price-term">/ term</span>
+
+      <!-- Option Toggles -->
+      <div class="toggle-grid">
+        <input type="radio" id="opt-10w" name="plan" value="10w" data-amount="40" data-recurring="40" data-freq="1" data-name="Drop&amp;Go 10L Weekly">
+        <label for="opt-10w" class="toggle-option">
+          <div class="toggle-size">10L</div>
+          <div class="toggle-freq">Weekly</div>
+          <div class="toggle-price">R40 / week</div>
+          <div class="toggle-ribbon trial">Try it out</div>
+        </label>
+
+        <input type="radio" id="opt-10q" name="plan" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop&amp;Go 10L Quarterly">
+        <label for="opt-10q" class="toggle-option">
+          <div class="toggle-size">10L</div>
+          <div class="toggle-freq">Quarterly</div>
+          <div class="toggle-price">R299 / term</div>
+        </label>
+
+        <input type="radio" id="opt-20w" name="plan" value="20w" data-amount="70" data-recurring="70" data-freq="1" data-name="Drop&amp;Go 20L Weekly">
+        <label for="opt-20w" class="toggle-option">
+          <div class="toggle-size">20L</div>
+          <div class="toggle-freq">Weekly</div>
+          <div class="toggle-price">R70 / week</div>
+        </label>
+
+        <input type="radio" id="opt-20q" name="plan" value="20q" data-amount="499" data-recurring="499" data-freq="4" data-name="Drop&amp;Go 20L Quarterly" checked>
+        <label for="opt-20q" class="toggle-option">
+          <div class="toggle-size">20L</div>
+          <div class="toggle-freq">Quarterly</div>
+          <div class="toggle-price">R499 / term</div>
+          <div class="toggle-ribbon popular">Most popular</div>
+        </label>
       </div>
-      <div class="price-note">Billed once per quarter</div>
+
+      <!-- Selected plan description -->
+      <div class="plan-desc" id="plan-desc">
+        <div class="plan-subtitle" id="plan-subtitle">Half tank · For light individual water drinkers</div>
+      </div>
+
       <div class="divider"></div>
 
-      <form action="https://www.payfast.co.za/eng/process" method="post">
+      <form action="https://www.payfast.co.za/eng/process" method="post" id="sub-form">
         <input type="hidden" name="cmd" value="_paynow">
         <input type="hidden" name="receiver" value="21742448">
-        <input type="hidden" name="amount" value="499">
-        <input type="hidden" name="item_name" value="Drop&Go 20L Quarterly Subscription">
+        <input type="hidden" id="f-amount" name="amount" value="499">
+        <input type="hidden" id="f-item" name="item_name" value="Drop&Go 20L Quarterly">
         <input type="hidden" name="subscription_type" value="1">
-        <input type="hidden" name="recurring_amount" value="499">
-        <input type="hidden" name="frequency" value="4">
+        <input type="hidden" id="f-recurring" name="recurring_amount" value="499">
+        <input type="hidden" id="f-freq" name="frequency" value="4">
         <input type="hidden" name="cycles" value="0">
 
-        <label class="form-label">Full name</label>
+        <label class="form-label">Full Name</label>
         <input class="form-input" type="text" name="name_first" placeholder="e.g. Hugo Radley" required>
+
+        <label class="form-label">Phone Number</label>
+        <input class="form-input" type="tel" name="cell_number" placeholder="e.g. 0825233426" required>
+
+        <label class="form-label">Student Number</label>
+        <input class="form-input" type="text" name="custom_str4" placeholder="e.g. 24563210" required>
 
         <label class="form-label">Residence</label>
         <select class="form-input" name="custom_str2" required>
-          <option value="" disabled selected>Select residence</option>
+          <option value="">Select residence...</option>
           <option value="Dagbreek">Dagbreek</option>
           <option value="Irene">Irene</option>
         </select>
 
-                <label class="form-label">Section Nr / Name</label>
+        <label class="form-label">Section Number or Name</label>
         <input class="form-input" type="text" name="custom_str3" placeholder="e.g. 6 - Sukses" required>
 
-                <label class="form-label">Room details</label>
+        <label class="form-label">Room Number</label>
         <input class="form-input" type="text" name="custom_str1" placeholder="e.g. 7" required>
 
-        <label class="form-label">Phone number</label>
-        <input class="form-input" type="tel" name="cell_number" placeholder="e.g. 0825233426" required>
-
-        <button type="submit" class="btn-subscribe">Subscribe — R499 / term →</button>
+        <button type="submit" class="btn-subscribe" id="sub-btn">Subscribe — R499/term →</button>
       </form>
       <div class="secure-note">Secured by PayFast</div>
     </div>
-
   </div>
 
   <!-- WhatsApp -->
@@ -463,5 +530,38 @@
   </footer>
 
 </div>
+
+<script>
+  const radios = document.querySelectorAll('input[name="plan"]');
+  const descriptions = {
+    '10w': 'Half tank · For light individual water drinkers',
+    '10q': 'Half tank · For light individual water drinkers',
+    '20w': 'Full tank · For regular water drinkers OR sharing between roommates',
+    '20q': 'Full tank · For regular water drinkers OR sharing between roommates',
+  };
+  const btnLabels = {
+    '10w': 'Subscribe — R40/week →',
+    '10q': 'Subscribe — R299/term →',
+    '20w': 'Subscribe — R70/week →',
+    '20q': 'Subscribe — R499/term →',
+  };
+
+  function updateForm(radio) {
+    document.getElementById('f-amount').value    = radio.dataset.amount;
+    document.getElementById('f-recurring').value = radio.dataset.recurring;
+    document.getElementById('f-freq').value      = radio.dataset.freq;
+    document.getElementById('f-item').value      = radio.dataset.name;
+    document.getElementById('sub-btn').textContent = btnLabels[radio.value];
+    document.getElementById('plan-subtitle').textContent = descriptions[radio.value];
+  }
+
+  radios.forEach(r => {
+    r.addEventListener('change', () => updateForm(r));
+  });
+
+  // Init on load
+  const checked = document.querySelector('input[name="plan"]:checked');
+  if (checked) updateForm(checked);
+</script>
 </body>
 </html>
