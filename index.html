@@ -708,6 +708,8 @@
         <input type="hidden" id="f-recurring" name="recurring_amount"  value="499.00">
         <input type="hidden" id="f-freq"      name="frequency"         value="4">
         <input type="hidden"                  name="cycles"            value="0">
+        <input type="hidden"                  name="return_url"        value="https://dropngowater.co.za/?payment=success">
+        <input type="hidden"                  name="cancel_url"        value="https://dropngowater.co.za/">
 
         <label class="form-label">Full Name</label>
         <input class="form-input" type="text" name="name_first" id="name_first" placeholder="e.g. Hugo Radley" required>
@@ -1028,6 +1030,90 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       canvas.style.display = 'none';
       confettiParticles = [];
+    }
+  </script>
+
+  <!-- Success Overlay -->
+  <div id="success-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(5,13,26,0.93); flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px;">
+    <div style="max-width:480px;">
+      <div style="font-size:64px; margin-bottom:16px;">🎉</div>
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px; font-weight:800; color:#ffffff; margin-bottom:16px; letter-spacing:-0.5px;">You're in — welcome to Drop&amp;Go!</h2>
+      <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; color:#a0b4cc; line-height:1.75; margin-bottom:10px;">Your tank will be delivered on the <strong style="color:#ffffff;">next delivery Saturday.</strong></p>
+      <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; color:#a0b4cc; line-height:1.75; margin-bottom:10px;">📱 You'll receive a <strong style="color:#ffffff;">WhatsApp message</strong> the day before delivery confirming your exact delivery time.</p>
+      <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; color:#6b83a6; line-height:1.75; margin-bottom:32px;">Thanks so much for the support — <strong style="color:#00c8ff;">The Drop&amp;Go Team</strong> 💧</p>
+      <button onclick="closeSuccess()" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:700; background:linear-gradient(135deg,#0066ff,#00c8ff); color:white; border:none; border-radius:12px; padding:15px 36px; cursor:pointer; box-shadow:0 8px 24px rgba(0,150,255,0.35);">Take me to my subscription →</button>
+    </div>
+  </div>
+  <canvas id="confetti-canvas" style="position:fixed; inset:0; z-index:9998; pointer-events:none; display:none;"></canvas>
+
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('payment') === 'success' && !sessionStorage.getItem('dg_celebrated')) {
+        sessionStorage.setItem('dg_celebrated', '1');
+        window.history.replaceState({}, '', '/');
+        var overlay = document.getElementById('success-overlay');
+        overlay.style.display = 'flex';
+        startConfetti();
+        setTimeout(stopConfetti, 7000);
+      }
+    })();
+
+    function closeSuccess() {
+      document.getElementById('success-overlay').style.display = 'none';
+      stopConfetti();
+    }
+
+    var confettiRAF = null;
+    var confettiParts = [];
+
+    function startConfetti() {
+      var canvas = document.getElementById('confetti-canvas');
+      canvas.style.display = 'block';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      var ctx = canvas.getContext('2d');
+      var colors = ['#00c8ff','#0066ff','#ffffff','#00ffcc','#7b61ff','#ffdd57','#ff6b9d'];
+      confettiParts = [];
+      for (var i = 0; i < 180; i++) {
+        confettiParts.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          w: Math.random() * 10 + 4,
+          h: Math.random() * 5 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 3 + 1.5,
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.15,
+          drift: (Math.random() - 0.5) * 1.2
+        });
+      }
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettiParts.forEach(function(p) {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = 0.9;
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          ctx.restore();
+          p.y += p.speed;
+          p.x += p.drift;
+          p.angle += p.spin;
+          if (p.y > canvas.height) { p.y = -10; p.x = Math.random() * canvas.width; }
+        });
+        confettiRAF = requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    function stopConfetti() {
+      if (confettiRAF) cancelAnimationFrame(confettiRAF);
+      var canvas = document.getElementById('confetti-canvas');
+      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+      canvas.style.display = 'none';
+      confettiParts = [];
     }
   </script>
 </body>
