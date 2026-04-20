@@ -656,10 +656,10 @@
         </div>
       </div>
 
-      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="39"  data-recurring="39"  data-freq="2" data-name="Drop&amp;Go 10L Weekly"    style="display:none">
-      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop&amp;Go 10L Quarterly" style="display:none">
-      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="59"  data-recurring="59"  data-freq="2" data-name="Drop&amp;Go 20L Weekly"    style="display:none">
-      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="449" data-recurring="449" data-freq="4" data-name="Drop&amp;Go 20L Quarterly" style="display:none" checked>
+      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="39"  data-recurring="39"  data-freq="2" data-name="Drop and Go 10L Weekly"    style="display:none">
+      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop and Go 10L Quarterly" style="display:none">
+      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="59"  data-recurring="59"  data-freq="2" data-name="Drop and Go 20L Weekly"    style="display:none">
+      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="449" data-recurring="449" data-freq="4" data-name="Drop and Go 20L Quarterly" style="display:none" checked>
 
       <div class="divider" style="margin-top:24px;"></div>
 
@@ -667,17 +667,17 @@
         <input type="hidden" name="cmd" value="_paynow">
         <input type="hidden" name="receiver" value="21742448">
         <input type="hidden" id="f-amount"    name="amount"            value="449">
-        <input type="hidden" id="f-item"      name="item_name"         value="Drop&Go 20L Quarterly">
+        <input type="hidden" id="f-item"      name="item_name"         value="Drop and Go 20L Quarterly">
         <input type="hidden"                  name="subscription_type" value="1">
         <input type="hidden" id="f-recurring" name="recurring_amount"  value="449">
         <input type="hidden" id="f-freq"      name="frequency"         value="4">
         <input type="hidden"                  name="cycles"            value="0">
 
-        <label class="form-label">Full Name</label>
-        <input class="form-input" type="text" name="name_first" placeholder="e.g. Hugo Radley" required>
+        <label class="form-label">First Name</label>
+        <input class="form-input" type="text" name="name_first" placeholder="e.g. Hugo" required>
 
-        <label class="form-label">Phone Number</label>
-        <input class="form-input" type="tel" name="cell_number" placeholder="e.g. 0825233426" required>
+        <label class="form-label">Last Name</label>
+        <input class="form-input" type="text" name="name_last" placeholder="e.g. Radley" required>
 
         <label class="form-label">Student Number</label>
         <input class="form-input" type="text" name="custom_str4" placeholder="e.g. 24563210" required>
@@ -788,7 +788,7 @@
     document.getElementById('f-amount').value    = radio.dataset.amount;
     document.getElementById('f-recurring').value = radio.dataset.recurring;
     document.getElementById('f-freq').value      = radio.dataset.freq;
-    document.getElementById('f-item').value      = radio.dataset.name;
+    document.getElementById('f-item').value = radio.dataset.name;
     document.getElementById('sub-btn').textContent = btnLabels[value];
   }
 
