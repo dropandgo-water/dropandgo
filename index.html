@@ -656,44 +656,43 @@
         </div>
       </div>
 
-      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="39"  data-recurring="39"  data-freq="2" data-name="Drop and Go 10L Weekly"    style="display:none">
-      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop and Go 10L Quarterly" style="display:none">
-      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="59"  data-recurring="59"  data-freq="2" data-name="Drop and Go 20L Weekly"    style="display:none">
-      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="449" data-recurring="449" data-freq="4" data-name="Drop and Go 20L Quarterly" style="display:none" checked>
+      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="39"  data-recurring="39"  data-freq="2" data-name="Drop and Go 10L Weekly"    data-plantype="10L_WEEK"    style="display:none">
+      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop and Go 10L Quarterly" data-plantype="10L_WEEK" style="display:none">
+      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="69"  data-recurring="69"  data-freq="2" data-name="Drop and Go 20L Weekly"    data-plantype="20L_WEEK"    style="display:none">
+      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="499" data-recurring="499" data-freq="4" data-name="Drop and Go 20L Quarterly" data-plantype="20L_WEEK" style="display:none" checked>
 
       <div class="divider" style="margin-top:24px;"></div>
 
       <form action="https://www.payfast.co.za/eng/process" method="post">
         <input type="hidden" name="cmd" value="_paynow">
         <input type="hidden" name="receiver" value="21742448">
-        <input type="hidden" id="f-amount"    name="amount"            value="449">
+        <input type="hidden" id="f-amount"    name="amount"            value="499">
         <input type="hidden" id="f-item"      name="item_name"         value="Drop and Go 20L Quarterly">
         <input type="hidden"                  name="subscription_type" value="1">
-        <input type="hidden" id="f-recurring" name="recurring_amount"  value="449">
+        <input type="hidden" id="f-recurring" name="recurring_amount"  value="499">
         <input type="hidden" id="f-freq"      name="frequency"         value="4">
         <input type="hidden"                  name="cycles"            value="0">
 
-        <label class="form-label">First Name</label>
-        <input class="form-input" type="text" name="name_first" placeholder="e.g. Hugo" required>
+        <label class="form-label">Full Name</label>
+        <input class="form-input" type="text" name="name_first" placeholder="e.g. Hugo Radley" required>
 
-        <label class="form-label">Last Name</label>
-        <input class="form-input" type="text" name="name_last" placeholder="e.g. Radley" required>
-
-        <label class="form-label">Student Number</label>
-        <input class="form-input" type="text" name="custom_str4" placeholder="e.g. 24563210" required>
+        <label class="form-label">Cell Number</label>
+        <input class="form-input" type="tel" name="cell_number" id="cell_number" placeholder="e.g. 0825233426" required oninput="formatCell(this)">
 
         <label class="form-label">Residence</label>
-        <select class="form-input" name="custom_str2" required>
+        <select class="form-input" name="custom_str1" required>
           <option value="">Select residence...</option>
           <option value="Dagbreek">Dagbreek</option>
           <option value="Irene">Irene</option>
         </select>
 
         <label class="form-label">Section Number or Name</label>
-        <input class="form-input" type="text" name="custom_str3" placeholder="e.g. 6 - Sukses" required>
+        <input class="form-input" type="text" name="custom_str2" placeholder="e.g. 6 - Sukses" required>
 
         <label class="form-label">Room Number</label>
-        <input class="form-input" type="text" name="custom_str1" placeholder="e.g. 7" required>
+        <input class="form-input" type="text" name="custom_str3" placeholder="e.g. 7" required>
+
+        <input type="hidden" id="f-plan-type" name="custom_str4" value="20L_WEEK">
 
         <button type="submit" class="btn-subscribe" id="sub-btn">Subscribe — R499/term -></button>
       </form>
@@ -771,11 +770,31 @@
 </div>
 
 <script>
+  function formatCell(input) {
+    // Strip everything except digits
+    let digits = input.value.replace(/\D/g, '');
+    // If starts with 0, replace with +27
+    if (digits.startsWith('0')) {
+      digits = '27' + digits.slice(1);
+    }
+    // Store +27 format in a hidden field for PayFast, show friendly in input
+    let hidden = document.getElementById('cell_number_payfast');
+    if (!hidden) {
+      hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.id = 'cell_number_payfast';
+      hidden.name = 'cell_number';
+      input.name = '_cell_display';
+      input.parentNode.appendChild(hidden);
+    }
+    hidden.value = '+' + digits;
+  }
+
   const btnLabels = {
     '10w': 'Subscribe — R39/week ->',
     '10q': 'Subscribe — R299/term ->',
-    '20w': 'Subscribe — R59/week ->',
-    '20q': 'Subscribe — R449/term ->',
+    '20w': 'Subscribe — R69/week ->',
+    '20q': 'Subscribe — R499/term ->',
   };
   function pickPlan(value) {
     // Deselect all size-options
@@ -789,6 +808,7 @@
     document.getElementById('f-recurring').value = radio.dataset.recurring;
     document.getElementById('f-freq').value      = radio.dataset.freq;
     document.getElementById('f-item').value = radio.dataset.name;
+    document.getElementById('f-plan-type').value = radio.dataset.plantype;
     document.getElementById('sub-btn').textContent = btnLabels[value];
   }
 
