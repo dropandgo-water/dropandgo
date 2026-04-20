@@ -814,6 +814,38 @@
 
   // Init
   pickPlan('20q');
+
+  // Save form fields to localStorage on input
+  const fieldsToSave = ['name_first', '_cell_display', 'custom_str1', 'custom_str2', 'custom_str3'];
+
+  function saveField(name) {
+    const el = document.querySelector('[name="' + name + '"]');
+    if (el) localStorage.setItem('dg_' + name, el.value);
+  }
+
+  function restoreFields() {
+    fieldsToSave.forEach(function(name) {
+      const el = document.querySelector('[name="' + name + '"]');
+      const saved = localStorage.getItem('dg_' + name);
+      if (el && saved) {
+        el.value = saved;
+        // If it's the cell field, re-run formatter to set hidden +27 field
+        if (name === '_cell_display') formatCell(el);
+      }
+    });
+  }
+
+  // Attach listeners
+  fieldsToSave.forEach(function(name) {
+    const el = document.querySelector('[name="' + name + '"]');
+    if (el) {
+      el.addEventListener('input', function() { saveField(name); });
+      el.addEventListener('change', function() { saveField(name); });
+    }
+  });
+
+  // Restore on load
+  restoreFields();
 </script>
 </body>
 </html>
