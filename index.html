@@ -696,10 +696,6 @@
         </div>
       </div>
 
-      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="39"  data-recurring="39"  data-freq="2" data-name="Drop and Go 10L Weekly"    data-plantype="10L_WEEK"    style="display:none">
-      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop and Go 10L Quarterly" data-plantype="10L_WEEK" style="display:none">
-      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="69"  data-recurring="69"  data-freq="2" data-name="Drop and Go 20L Weekly"    data-plantype="20L_WEEK"    style="display:none">
-      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="499" data-recurring="499" data-freq="4" data-name="Drop and Go 20L Quarterly" data-plantype="20L_WEEK" style="display:none" checked>
 
       <div class="divider" style="margin-top:24px;"></div>
 
@@ -716,11 +712,8 @@
         <label class="form-label">Full Name</label>
         <input class="form-input" type="text" name="name_first" id="name_first" placeholder="e.g. Hugo Radley" required>
 
-        <label class="form-label">Email</label>
-        <input class="form-input" type="email" name="email_address" id="email_address" placeholder="e.g. hugoradley@icloud.com" required>
-
         <label class="form-label">Cell Number</label>
-        <input class="form-input" type="tel" name="cell_number" id="cell_number" placeholder="e.g. 0825233426" required inputmode="numeric" oninput="formatCell(this)" onblur="formatCell(this)" onpaste="setTimeout(()=>formatCell(this),10)">
+        <input class="form-input" type="tel" name="cell_number" id="cell_number" placeholder="e.g. 0825233426" required>
 
         <label class="form-label">Residence</label>
         <select class="form-input" name="custom_str1" id="custom_str1" required>
@@ -739,6 +732,12 @@
 
         <button type="button" class="btn-subscribe" id="sub-btn" onclick="handleSubscribe()">← Select a plan above</button>
       </form>
+
+            <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="39"  data-recurring="39"  data-freq="2" data-name="Drop and Go 10L Weekly"    data-plantype="10L_WEEK"    style="display:none">
+      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop and Go 10L Quarterly" data-plantype="10L_WEEK" style="display:none">
+      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="69"  data-recurring="69"  data-freq="2" data-name="Drop and Go 20L Weekly"    data-plantype="20L_WEEK"    style="display:none">
+      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="499" data-recurring="499" data-freq="4" data-name="Drop and Go 20L Quarterly" data-plantype="20L_WEEK" style="display:none" checked>
+
       <div class="cancel-note">&#x2714; Cancel anytime — just contact us</div>
       <div class="secure-note">Secured by PayFast</div>
 
@@ -906,7 +905,7 @@
   }
 
   // Save form fields to localStorage on input
-  const fieldsToSave = ['name_first', 'email_address', 'cell_number', 'custom_str1', 'custom_str2', 'custom_str3'];
+  const fieldsToSave = ['name_first', 'cell_number', 'custom_str1', 'custom_str2', 'custom_str3'];
 
   function saveField(name) {
     const el = document.querySelector('[name="' + name + '"]');
