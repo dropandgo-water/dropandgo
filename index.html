@@ -341,20 +341,39 @@
       gap: 8px;
     }
     .size-option {
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(0,200,255,0.25);
       border-radius: 12px;
       padding: 12px 8px 22px;
       text-align: center;
       cursor: pointer;
       position: relative; overflow: hidden;
-      transition: all 0.2s ease;
-      background: rgba(255,255,255,0.03);
+      transition: all 0.4s ease;
+      background: rgba(0,150,255,0.04);
+      box-shadow: 0 0 10px rgba(0,200,255,0.12);
+      animation: idleGlow 2.5s ease-in-out infinite;
     }
-    .size-option:hover { border-color: rgba(0,200,255,0.3); }
+    .size-option:hover { border-color: rgba(0,200,255,0.5); box-shadow: 0 0 16px rgba(0,200,255,0.25); }
+    .size-option.dimmed {
+      border-color: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      box-shadow: none;
+      opacity: 0.45;
+      animation: none;
+    }
     .size-option.selected {
       border-color: var(--cyan);
       background: linear-gradient(135deg, rgba(0,102,255,0.15), rgba(0,200,255,0.1));
       box-shadow: 0 0 14px rgba(0,200,255,0.15);
+      opacity: 1;
+      animation: cardPulse 3s ease-in-out infinite;
+    }
+    @keyframes idleGlow {
+      0%, 100% { box-shadow: 0 0 8px rgba(0,200,255,0.1); border-color: rgba(0,200,255,0.2); }
+      50%       { box-shadow: 0 0 16px rgba(0,200,255,0.22); border-color: rgba(0,200,255,0.38); }
+    }
+    @keyframes cardPulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(0,180,255,0.25), 0 0 20px rgba(0,180,255,0.1); border-color: rgba(0,200,255,0.7); }
+      50%       { box-shadow: 0 0 18px rgba(0,220,255,0.55), 0 0 36px rgba(0,200,255,0.2); border-color: rgba(0,220,255,1); }
     }
     .sopt-freq {
       font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
@@ -571,6 +590,27 @@
       padding-bottom: 20px; line-height: 1.7;
     }
 
+    @keyframes btnShake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-6px); }
+      40%       { transform: translateX(6px); }
+      60%       { transform: translateX(-4px); }
+      80%       { transform: translateX(4px); }
+    }
+    .btn-shake { animation: btnShake 0.5s ease; }
+
+    .input-error {
+      border-color: rgba(255,80,80,0.7) !important;
+      background: rgba(255,80,80,0.06) !important;
+      box-shadow: 0 0 8px rgba(255,80,80,0.25);
+    }
+
+    @keyframes cardFlash {
+      0%, 100% { border-color: rgba(255,255,255,0.1); }
+      50%       { border-color: rgba(0,220,255,0.6); box-shadow: 0 0 14px rgba(0,200,255,0.3); }
+    }
+    .card-flash { animation: cardFlash 0.7s ease; }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -647,7 +687,7 @@
               <div class="sopt-price">R69 <span class="sopt-per">/week</span></div>
               <div class="sopt-ribbon trial">Try it out</div>
             </div>
-            <div class="size-option selected" id="sopt-20q" onclick="pickPlan('20q')">
+            <div class="size-option" id="sopt-20q" onclick="pickPlan('20q')">
               <div class="sopt-freq">Quarterly</div>
               <div class="sopt-price">R499 <span class="sopt-per">/term</span></div>
               <div class="sopt-ribbon popular">Best value</div>
@@ -694,7 +734,7 @@
 
         <input type="hidden" id="f-plan-type" name="custom_str4" value="20L_WEEK">
 
-        <button type="submit" class="btn-subscribe" id="sub-btn">Subscribe — R499/term -></button>
+        <button type="button" class="btn-subscribe" id="sub-btn" onclick="handleSubscribe()">← Select a plan above</button>
       </form>
       <div class="cancel-note">&#x2714; Cancel anytime — just contact us</div>
       <div class="secure-note">Secured by PayFast</div>
@@ -804,8 +844,11 @@
     '20q': 'Subscribe — R499/term ->',
   };
   function pickPlan(value) {
-    // Deselect all size-options
-    document.querySelectorAll('.size-option').forEach(o => o.classList.remove('selected'));
+    // Dim all, remove selected
+    document.querySelectorAll('.size-option').forEach(o => {
+      o.classList.remove('selected');
+      o.classList.add('dimmed');
+    });
     document.getElementById('sopt-' + value).classList.add('selected');
     // Check hidden radio
     const radio = document.getElementById('opt-' + value);
@@ -816,11 +859,56 @@
     document.getElementById('f-freq').value      = radio.dataset.freq;
     document.getElementById('f-item').value = radio.dataset.name;
     document.getElementById('f-plan-type').value = radio.dataset.plantype;
-    document.getElementById('sub-btn').textContent = btnLabels[value];
+    planSelected = true;
+  document.getElementById('sub-btn').textContent = btnLabels[value];
   }
 
-  // Init
-  pickPlan('20q');
+  // State
+  let planSelected = false;
+
+  // Init — show prompt, wait for user to select a plan
+  document.getElementById('sub-btn').textContent = '← Select a plan above';
+
+  function handleSubscribe() {
+    // Check plan selected
+    if (!planSelected) {
+      flashCards();
+      shakeBtn('← Select a plan above');
+      return;
+    }
+    // Check required fields
+    const form = document.querySelector('form');
+    const inputs = form.querySelectorAll('[required]');
+    for (let i = 0; i < inputs.length; i++) {
+      if (!inputs[i].value.trim()) {
+        inputs[i].focus();
+        inputs[i].classList.add('input-error');
+        setTimeout(() => inputs[i].classList.remove('input-error'), 1500);
+        shakeBtn('Fill in your details first');
+        setTimeout(() => {
+          document.getElementById('sub-btn').textContent = btnLabels[document.querySelector('input[name=plan]:checked')?.value || '20q'];
+        }, 1800);
+        return;
+      }
+    }
+    // All good — submit
+    form.submit();
+  }
+
+  function shakeBtn(msg) {
+    const btn = document.getElementById('sub-btn');
+    const orig = btn.textContent;
+    btn.textContent = msg;
+    btn.classList.add('btn-shake');
+    setTimeout(() => btn.classList.remove('btn-shake'), 600);
+  }
+
+  function flashCards() {
+    document.querySelectorAll('.size-option').forEach(function(el) {
+      el.classList.add('card-flash');
+      setTimeout(() => el.classList.remove('card-flash'), 700);
+    });
+  }
 
   // Save form fields to localStorage on input
   const fieldsToSave = ['name_first', '_cell_display', 'custom_str1', 'custom_str2', 'custom_str3'];
