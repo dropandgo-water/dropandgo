@@ -1034,7 +1034,7 @@
   </script>
 
   <!-- Success Overlay -->
-  <div id="success-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(5,13,26,0.93); flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px;">
+  <div id="success-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(5,13,26,0.93); flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; box-sizing:border-box;">
     <div style="max-width:480px;">
       <div style="font-size:64px; margin-bottom:16px;">🎉</div>
       <h2 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px; font-weight:800; color:#ffffff; margin-bottom:16px; letter-spacing:-0.5px;">You're in — welcome to Drop&amp;Go!</h2>
@@ -1048,14 +1048,19 @@
 
   <script>
     (function() {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('payment') === 'success' && !sessionStorage.getItem('dg_celebrated')) {
-        sessionStorage.setItem('dg_celebrated', '1');
-        window.history.replaceState({}, '', '/');
-        var overlay = document.getElementById('success-overlay');
-        overlay.style.display = 'flex';
-        startConfetti();
-        setTimeout(stopConfetti, 7000);
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('payment') === 'success') {
+        var lastCelebrated = sessionStorage.getItem('dg_celebrated');
+        var now = Date.now();
+        // Only block if celebrated in last 10 seconds (prevents double-fire on refresh)
+        if (!lastCelebrated || (now - parseInt(lastCelebrated)) > 10000) {
+          sessionStorage.setItem('dg_celebrated', now.toString());
+          window.history.replaceState({}, '', window.location.pathname);
+          var overlay = document.getElementById('success-overlay');
+          overlay.style.display = 'flex';
+          startConfetti();
+          setTimeout(stopConfetti, 7000);
+        }
       }
     })();
 
