@@ -605,7 +605,7 @@
 
   <!-- Trust Bar -->
   <div class="trust-bar fade-2">
-    <div class="trust-item"><span>&#x2705;</span> Purified, Tested &amp; Certified — Reverse Osmosis Drinking Water</div>
+    <div class="trust-item"><span>&#x2705;</span> RO PURIFIED DRINKING WATER — TESTED, CERTIFIED &amp; SANS 241 COMPLIANT</div>
     <div class="trust-item"><span>&#x1F4A7;</span> Delivered to your room every Saturday</div>
     <div class="trust-item"><span>&#x267B;&#xFE0F;</span> Reusable Tank — Cleaned &amp; Swapped Weekly</div>
   </div>
@@ -624,13 +624,13 @@
           <div class="size-options">
             <div class="size-option" id="sopt-10w" onclick="pickPlan('10w')">
               <div class="sopt-freq">Weekly</div>
-              <div class="sopt-price">R44 <span class="sopt-per">/week</span></div>
+              <div class="sopt-price">R39 <span class="sopt-per">/week</span></div>
               <div class="sopt-ribbon trial">Try it out</div>
             </div>
             <div class="size-option" id="sopt-10q" onclick="pickPlan('10q')">
               <div class="sopt-freq">Quarterly</div>
               <div class="sopt-price">R299 <span class="sopt-per">/term</span></div>
-              <div class="sopt-ribbon popular">15% OFF</div>
+              <div class="sopt-ribbon popular">Save with term plan</div>
             </div>
           </div>
         </div>
@@ -644,32 +644,32 @@
           <div class="size-options">
             <div class="size-option" id="sopt-20w" onclick="pickPlan('20w')">
               <div class="sopt-freq">Weekly</div>
-              <div class="sopt-price">R73 <span class="sopt-per">/week</span></div>
+              <div class="sopt-price">R59 <span class="sopt-per">/week</span></div>
               <div class="sopt-ribbon trial">Try it out</div>
             </div>
             <div class="size-option selected" id="sopt-20q" onclick="pickPlan('20q')">
               <div class="sopt-freq">Quarterly</div>
-              <div class="sopt-price">R499 <span class="sopt-per">/term</span></div>
-              <div class="sopt-ribbon popular">15% OFF</div>
+              <div class="sopt-price">R449 <span class="sopt-per">/term</span></div>
+              <div class="sopt-ribbon popular">Best value</div>
             </div>
           </div>
         </div>
       </div>
 
-      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="44"  data-recurring="44"  data-freq="2" data-name="Drop&amp;Go 10L Weekly"    style="display:none">
+      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="39"  data-recurring="39"  data-freq="2" data-name="Drop&amp;Go 10L Weekly"    style="display:none">
       <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop&amp;Go 10L Quarterly" style="display:none">
-      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="73"  data-recurring="73"  data-freq="2" data-name="Drop&amp;Go 20L Weekly"    style="display:none">
-      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="499" data-recurring="499" data-freq="4" data-name="Drop&amp;Go 20L Quarterly" style="display:none" checked>
+      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="59"  data-recurring="59"  data-freq="2" data-name="Drop&amp;Go 20L Weekly"    style="display:none">
+      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="449" data-recurring="449" data-freq="4" data-name="Drop&amp;Go 20L Quarterly" style="display:none" checked>
 
       <div class="divider" style="margin-top:24px;"></div>
 
       <form action="https://www.payfast.co.za/eng/process" method="post">
         <input type="hidden" name="cmd" value="_paynow">
         <input type="hidden" name="receiver" value="21742448">
-        <input type="hidden" id="f-amount"    name="amount"            value="499">
+        <input type="hidden" id="f-amount"    name="amount"            value="449">
         <input type="hidden" id="f-item"      name="item_name"         value="Drop&Go 20L Quarterly">
         <input type="hidden"                  name="subscription_type" value="1">
-        <input type="hidden" id="f-recurring" name="recurring_amount"  value="499">
+        <input type="hidden" id="f-recurring" name="recurring_amount"  value="449">
         <input type="hidden" id="f-freq"      name="frequency"         value="4">
         <input type="hidden"                  name="cycles"            value="0">
 
@@ -772,10 +772,10 @@
 
 <script>
   const btnLabels = {
-    '10w': 'Subscribe — R44/week ->',
+    '10w': 'Subscribe — R39/week ->',
     '10q': 'Subscribe — R299/term ->',
-    '20w': 'Subscribe — R73/week ->',
-    '20q': 'Subscribe — R499/term ->',
+    '20w': 'Subscribe — R59/week ->',
+    '20q': 'Subscribe — R449/term ->',
   };
   function pickPlan(value) {
     // Deselect all size-options
