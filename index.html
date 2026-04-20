@@ -704,12 +704,11 @@
       <div class="divider" style="margin-top:24px;"></div>
 
       <form action="https://www.payfast.co.za/eng/process" method="post">
-        <input type="hidden" name="cmd" value="_paynow">
-        <input type="hidden" name="receiver" value="21742448">
-        <input type="hidden" id="f-amount"    name="amount"            value="499">
+        <input type="hidden" name="merchant_id"       value="21742448">
+        <input type="hidden" id="f-amount"    name="amount"            value="499.00">
         <input type="hidden" id="f-item"      name="item_name"         value="Drop and Go 20L Quarterly">
         <input type="hidden"                  name="subscription_type" value="1">
-        <input type="hidden" id="f-recurring" name="recurring_amount"  value="499">
+        <input type="hidden" id="f-recurring" name="recurring_amount"  value="499.00">
         <input type="hidden" id="f-freq"      name="frequency"         value="4">
         <input type="hidden"                  name="cycles"            value="0">
         <input type="hidden"                  name="return_url"        value="https://dropngowater.co.za/?payment=success">
@@ -865,8 +864,8 @@
     const radio = document.getElementById('opt-' + value);
     radio.checked = true;
     // Update form hidden fields
-    document.getElementById('f-amount').value    = radio.dataset.amount;
-    document.getElementById('f-recurring').value = radio.dataset.recurring;
+    document.getElementById('f-amount').value    = parseFloat(radio.dataset.amount).toFixed(2);
+    document.getElementById('f-recurring').value = parseFloat(radio.dataset.recurring).toFixed(2);
     document.getElementById('f-freq').value      = radio.dataset.freq;
     document.getElementById('f-item').value = radio.dataset.name;
     document.getElementById('f-plan-type').value = radio.dataset.plantype;
