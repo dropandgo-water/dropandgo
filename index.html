@@ -365,10 +365,6 @@
       font-size: 18px; font-weight: 800; color: var(--white); line-height: 1;
     }
     .sopt-per { font-size: 10px; font-weight: 500; color: var(--muted); }
-    .sopt-rate {
-      font-size: 9px; color: rgba(0,200,255,0.55);
-      font-weight: 600; margin-top: 3px;
-    }
     .sopt-ribbon {
       position: absolute; bottom: 0; left: 0; right: 0;
       font-size: 7px; font-weight: 700; letter-spacing: 1px;
@@ -628,15 +624,13 @@
           <div class="size-options">
             <div class="size-option" id="sopt-10w" onclick="pickPlan('10w')">
               <div class="sopt-freq">Weekly</div>
-              <div class="sopt-price">R45 <span class="sopt-per">/week</span></div>
-              <div class="sopt-rate">R4.50 / L</div>
+              <div class="sopt-price">R44 <span class="sopt-per">/week</span></div>
               <div class="sopt-ribbon trial">Try it out</div>
             </div>
             <div class="size-option" id="sopt-10q" onclick="pickPlan('10q')">
               <div class="sopt-freq">Quarterly</div>
               <div class="sopt-price">R299 <span class="sopt-per">/term</span></div>
-              <div class="sopt-rate">R3.74 / L</div>
-              <div class="sopt-ribbon popular">Best value</div>
+              <div class="sopt-ribbon popular">15% OFF</div>
             </div>
           </div>
         </div>
@@ -650,22 +644,21 @@
           <div class="size-options">
             <div class="size-option" id="sopt-20w" onclick="pickPlan('20w')">
               <div class="sopt-freq">Weekly</div>
-              <div class="sopt-price">R80 <span class="sopt-per">/week</span></div>
-              <div class="sopt-rate">R4.00 / L</div>
+              <div class="sopt-price">R73 <span class="sopt-per">/week</span></div>
+              <div class="sopt-ribbon trial">Try it out</div>
             </div>
             <div class="size-option selected" id="sopt-20q" onclick="pickPlan('20q')">
               <div class="sopt-freq">Quarterly</div>
               <div class="sopt-price">R499 <span class="sopt-per">/term</span></div>
-              <div class="sopt-rate">R3.12 / L</div>
-              <div class="sopt-ribbon popular">Best value</div>
+              <div class="sopt-ribbon popular">15% OFF</div>
             </div>
           </div>
         </div>
       </div>
 
-      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="45"  data-recurring="45"  data-freq="2" data-name="Drop&amp;Go 10L Weekly"    style="display:none">
+      <input type="radio" name="plan" id="opt-10w" value="10w" data-amount="44"  data-recurring="44"  data-freq="2" data-name="Drop&amp;Go 10L Weekly"    style="display:none">
       <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="299" data-recurring="299" data-freq="4" data-name="Drop&amp;Go 10L Quarterly" style="display:none">
-      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="80"  data-recurring="80"  data-freq="2" data-name="Drop&amp;Go 20L Weekly"    style="display:none">
+      <input type="radio" name="plan" id="opt-20w" value="20w" data-amount="73"  data-recurring="73"  data-freq="2" data-name="Drop&amp;Go 20L Weekly"    style="display:none">
       <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="499" data-recurring="499" data-freq="4" data-name="Drop&amp;Go 20L Quarterly" style="display:none" checked>
 
       <div class="divider" style="margin-top:24px;"></div>
@@ -779,9 +772,9 @@
 
 <script>
   const btnLabels = {
-    '10w': 'Subscribe — R45/week ->',
+    '10w': 'Subscribe — R44/week ->',
     '10q': 'Subscribe — R299/term ->',
-    '20w': 'Subscribe — R80/week ->',
+    '20w': 'Subscribe — R73/week ->',
     '20q': 'Subscribe — R499/term ->',
   };
   function pickPlan(value) {
