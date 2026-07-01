@@ -707,13 +707,13 @@
         <label class="form-label">Cell Number</label>
         <input class="form-input" type="tel" name="cell_number" id="cell_number" placeholder="e.g. 0821234567" required>
 
-        <label class="form-label">Residence</label>
-        <select class="form-input" name="custom_str1" id="custom_str1" required>
+       <select class="form-input" name="custom_str1" id="custom_str1" required>
           <option value="">Select residence...</option>
           <option value="Dagbreek">Dagbreek</option>
+          <option value="Huis Marais">Huis Marais</option>
           <option value="Irene">Irene</option>
+          <option value="Sonop">Sonop</option>
         </select>
-
         <label class="form-label">Section Number or Name</label>
         <input class="form-input" type="text" name="custom_str2" id="custom_str2" placeholder="e.g. 6" required>
 
@@ -726,8 +726,8 @@
       </form>
 
             
-      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="350" data-recurring="350" data-freq="4" data-name="Drop and Go 10L Quarterly" data-plantype="10L_WEEK" style="display:none">
-      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="560" data-recurring="560" data-freq="4" data-name="Drop and Go 20L Quarterly" data-plantype="20L_WEEK" style="display:none" checked>
+      <input type="radio" name="plan" id="opt-10q" value="10q" data-amount="320" data-recurring="320" data-freq="4" data-name="Drop and Go 10L Quarterly" data-plantype="10L_WEEK" style="display:none">
+      <input type="radio" name="plan" id="opt-20q" value="20q" data-amount="490" data-recurring="490" data-freq="4" data-name="Drop and Go 20L Quarterly" data-plantype="20L_WEEK" style="display:none" checked>
 
       <div class="cancel-note">&#x2714; Cancel anytime — just contact us</div>
       <div class="secure-note">Secured by PayFast</div>
@@ -926,100 +926,7 @@
   restoreFields();
 </script>
 
-  <!-- Success Overlay -->
-  <div id="success-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(5,13,26,0.92); display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px;">
-    <div id="success-box" style="max-width:480px;">
-      <div style="font-size:64px; margin-bottom:16px;">🎉</div>
-      <h2 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px; font-weight:800; color:#ffffff; margin-bottom:12px;">Congratulations!</h2>
-      <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; color:#a0b4cc; line-height:1.7; margin-bottom:8px;">Your tank will be delivered this upcoming Saturday.</p>
-      <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; color:#a0b4cc; line-height:1.7; margin-bottom:32px;">Thanks so much for the support — <strong style="color:#00c8ff;">The Drop&amp;Go Team</strong> 💧</p>
-      <button onclick="closeSuccess()" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700; background:linear-gradient(135deg,#0066ff,#00c8ff); color:white; border:none; border-radius:12px; padding:14px 32px; cursor:pointer;">Back to Drop&Go →</button>
-    </div>
-  </div>
-  <canvas id="confetti-canvas" style="position:fixed; inset:0; z-index:9998; pointer-events:none; display:none;"></canvas>
-
-  <script>
-    // Confetti + success on ?payment=success
-    (function() {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('payment') === 'success' && !sessionStorage.getItem('dg_celebrated')) {
-        sessionStorage.setItem('dg_celebrated', '1');
-        // Clean URL
-        window.history.replaceState({}, '', '/');
-        // Show overlay
-        const overlay = document.getElementById('success-overlay');
-        overlay.style.display = 'flex';
-        // Start confetti
-        startConfetti();
-        // Auto-stop confetti after 6s but keep overlay
-        setTimeout(stopConfetti, 6000);
-      }
-    })();
-
-    function closeSuccess() {
-      document.getElementById('success-overlay').style.display = 'none';
-      stopConfetti();
-    }
-
-    // Lightweight confetti engine
-    var confettiInterval = null;
-    var confettiParticles = [];
-
-    function startConfetti() {
-      const canvas = document.getElementById('confetti-canvas');
-      canvas.style.display = 'block';
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const ctx = canvas.getContext('2d');
-      const colors = ['#00c8ff','#0066ff','#ffffff','#00ffcc','#7b61ff','#ffdd57'];
-
-      for (let i = 0; i < 160; i++) {
-        confettiParticles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height - canvas.height,
-          w: Math.random() * 10 + 5,
-          h: Math.random() * 5 + 3,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          speed: Math.random() * 3 + 2,
-          angle: Math.random() * Math.PI * 2,
-          spin: (Math.random() - 0.5) * 0.2,
-          drift: (Math.random() - 0.5) * 1.5
-        });
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        confettiParticles.forEach(function(p) {
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.angle);
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = 0.85;
-          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-          ctx.restore();
-          p.y += p.speed;
-          p.x += p.drift;
-          p.angle += p.spin;
-          if (p.y > canvas.height) {
-            p.y = -10;
-            p.x = Math.random() * canvas.width;
-          }
-        });
-        confettiInterval = requestAnimationFrame(draw);
-      }
-      draw();
-    }
-
-    function stopConfetti() {
-      if (confettiInterval) cancelAnimationFrame(confettiInterval);
-      const canvas = document.getElementById('confetti-canvas');
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      canvas.style.display = 'none';
-      confettiParticles = [];
-    }
-  </script>
-
+  
   <!-- Success Overlay -->
   <div id="success-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(5,13,26,0.93); flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; box-sizing:border-box;">
     <div style="max-width:480px;">
