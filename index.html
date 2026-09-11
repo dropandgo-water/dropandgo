@@ -620,6 +620,80 @@
     .fade-3 { animation: fadeUp 0.6s 0.3s ease both; }
     .fade-4 { animation: fadeUp 0.6s 0.45s ease both; }
     .fade-5 { animation: fadeUp 0.6s 0.6s ease both; }
+  /* ── FREE TRIAL MODE (only switches on via dropngowater.co.za/?trial=1) ── */
+    .trial-banner {
+      max-width: 520px; margin: 0 auto 20px;
+      text-align: center;
+      border: 1px solid rgba(61,255,160,0.45);
+      background: rgba(61,255,160,0.07);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+    .trial-banner-title { font-size: 22px; font-weight: 800; color: #3dffa0; margin-bottom: 4px; }
+    .trial-banner-sub { font-size: 13px; color: #a0b4cc; line-height: 1.6; }
+
+    body.trial-mode .plan-card.featured { border-color: rgba(61,255,160,0.35); }
+    body.trial-mode .size-option {
+      border-color: rgba(61,255,160,0.3);
+      background: rgba(61,255,160,0.04);
+      animation: trialIdle 2.5s ease-in-out infinite;
+    }
+    body.trial-mode .size-option.dimmed {
+      border-color: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      animation: none;
+    }
+    body.trial-mode .size-option.selected {
+      border-color: #3dffa0;
+      background: linear-gradient(135deg, rgba(61,255,160,0.16), rgba(0,200,255,0.08));
+      animation: trialPulse 3s ease-in-out infinite;
+    }
+    body.trial-mode .size-option.card-flash { animation: cardFlash 0.7s ease; }
+    body.trial-mode .size-option .sopt-freq { color: #3dffa0; }
+    .sopt-then { font-size: 11px; color: var(--muted); margin-top: 5px; }
+    body.trial-mode .btn-subscribe {
+      background: linear-gradient(135deg, #00b862, #3dffa0);
+      color: #03210f;
+      box-shadow: 0 8px 24px rgba(61,255,160,0.28);
+    }
+    .trial-fallback { text-align: center; margin-top: 14px; font-size: 12px; }
+    .trial-fallback a { color: var(--muted); }
+    @keyframes trialIdle {
+      0%, 100% { box-shadow: 0 0 8px rgba(61,255,160,0.1); }
+      50%       { box-shadow: 0 0 16px rgba(61,255,160,0.25); }
+    }
+    @keyframes trialPulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(61,255,160,0.25); }
+      50%       { box-shadow: 0 0 20px rgba(61,255,160,0.5); }
+    }
+
+    /* Trial success screen */
+    #trial-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(5,13,26,0.96);
+      align-items: flex-start; justify-content: center;
+      padding: 28px 22px; overflow-y: auto;
+    }
+    #trial-overlay.show { display: flex; }
+    .trial-done { max-width: 420px; width: 100%; margin: auto; text-align: center; }
+    .trial-done h2 { font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin: 8px 0 8px; }
+    .trial-done-lead { font-size: 15px; color: #a0b4cc; margin-bottom: 24px; }
+    .trial-step { display: flex; gap: 12px; text-align: left; margin-bottom: 10px; }
+    .trial-step-num {
+      width: 28px; height: 28px; min-width: 28px; border-radius: 50%;
+      background: rgba(61,255,160,0.15); border: 1px solid rgba(61,255,160,0.5);
+      color: #3dffa0; font-weight: 800; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .trial-step strong { display: block; color: #fff; font-size: 15px; margin-bottom: 2px; }
+    .trial-step p { font-size: 13px; color: #a0b4cc; line-height: 1.55; }
+    .trial-btn {
+      display: block; width: 100%; padding: 15px; border-radius: 12px;
+      font-weight: 700; font-size: 15px; text-decoration: none; margin-bottom: 22px;
+    }
+    .trial-btn-save { border: 1px solid rgba(0,200,255,0.5); color: #00c8ff; background: rgba(0,200,255,0.06); }
+    .trial-btn-wa { background: #1a8a44; color: #fff; }
+    .trial-done-note { font-size: 12px; color: var(--muted); line-height: 1.6; }
   </style>
 </head>
 <body>
