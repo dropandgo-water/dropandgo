@@ -1087,5 +1087,147 @@
       confettiParts = [];
     }
   </script>
+<!-- ═══ FREE TRIAL: success screen + trial mode (only active via ?trial=1 or ?payment=trial) ═══ -->
+  <div id="trial-overlay">
+    <div class="trial-done">
+      <div style="font-size:52px;">💧</div>
+      <h2>Your free trial is set up</h2>
+      <p class="trial-done-lead">Two last steps and you're done:</p>
+
+      <div class="trial-step">
+        <div class="trial-step-num">1</div>
+        <div><strong>Save our number</strong><p>Delivery times go out on WhatsApp and only reach you if our number is saved.</p></div>
+      </div>
+      <a class="trial-btn trial-btn-save" href="/dropngo.vcf">Save Drop&amp;Go's number</a>
+
+      <div class="trial-step">
+        <div class="trial-step-num">2</div>
+        <div><strong>Send us your details</strong><p>Opens WhatsApp with your details filled in. Just press send.</p></div>
+      </div>
+      <a class="trial-btn trial-btn-wa" id="trial-wa-btn" href="https://wa.me/27794771614">Finalise on WhatsApp</a>
+
+      <p class="trial-done-note" id="trial-done-note">R0 charged today. Cancel before 1 October and you pay nothing.</p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    // ── Trial settings: update these for each new trial round ──
+    var TRIAL_BILLING_DATE = '2026-10-01';  // first real charge (YYYY-MM-DD)
+    var TRIAL_LAST_SIGNUP  = '2026-09-30';  // after this day, /?trial=1 just shows the normal site
+    var TRIAL_DATE_LABEL   = '1 October';
+    var WA_NUMBER          = '27794771614';
+    var SITE               = 'https://dropngowater.co.za/';
+    var PLANS = {
+      '10m': { size: '10L', price: 159 },
+      '20m': { size: '20L', price: 249 }
+    };
+
+    function waLink(msg) {
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+
+    function detailsText(get) {
+      var p = PLANS[get('plan')];
+      return 'Name: ' + get('name_first') +
+        '\nPlan: ' + (p ? p.size + '/week (R' + p.price + '/month)' : '') +
+        '\nResidence: ' + get('custom_str1') +
+        '\nSection: ' + get('custom_str2') +
+        '\nRoom: ' + get('custom_str3');
+    }
+
+    function localDate() {
+      var d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    var params = new URLSearchParams(window.location.search);
+
+    // ── 1. Trial mode: same page, R0 today, first charge on TRIAL_BILLING_DATE ──
+    if (params.has('trial') && localDate() <= TRIAL_LAST_SIGNUP) {
+      document.body.classList.add('trial-mode');
+      var form = document.querySelector('form');
+
+      var setHidden = function (name, value) {
+        var el = form.querySelector('input[name="' + name + '"]');
+        if (!el) {
+          el = document.createElement('input');
+          el.type = 'hidden';
+          el.name = name;
+          form.appendChild(el);
+        }
+        el.value = value;
+      };
+      setHidden('amount', '0.00');
+      setHidden('billing_date', TRIAL_BILLING_DATE);
+      setHidden('return_url', SITE + '?payment=trial');
+      setHidden('cancel_url', SITE + '?trial=1');
+      setHidden('custom_str5', 'FREE_TRIAL');
+
+      Object.keys(PLANS).forEach(function (key) {
+        var p = PLANS[key];
+        var radio = document.getElementById('opt-' + key);
+        radio.dataset.amount   = '0';
+        radio.dataset.name     = 'Drop and Go ' + p.size + ' Monthly - Free Trial';
+        radio.dataset.plantype = p.size + '_WEEK_TRIAL';
+
+        var card  = document.getElementById('sopt-' + key);
+        var price = card.querySelector('.sopt-price');
+        card.querySelector('.sopt-freq').textContent = 'Free trial';
+        price.innerHTML = 'R0 <span class="sopt-per">until ' + TRIAL_DATE_LABEL + '</span>';
+        price.insertAdjacentHTML('afterend', '<div class="sopt-then">then R' + p.price + '/month</div>');
+
+        btnLabels[key] = 'Start free trial — R0 today →';
+      });
+
+      document.querySelector('.section-heading').textContent = 'CHOOSE YOUR TRIAL PLAN:';
+      document.querySelector('.plans').insertAdjacentHTML('beforebegin',
+        '<div class="trial-banner">' +
+          '<div class="trial-banner-title">Free until ' + TRIAL_DATE_LABEL + '</div>' +
+          '<div class="trial-banner-sub">R0 today. Your monthly plan starts on ' + TRIAL_DATE_LABEL + '.<br>Cancel before then and you pay nothing.</div>' +
+        '</div>');
+      document.querySelector('.cancel-note').textContent = '✔ Cancel before ' + TRIAL_DATE_LABEL + ' and you pay nothing';
+
+      // Remember the plan so the success screen can put it in the WhatsApp message
+      var originalPickPlan = window.pickPlan;
+      window.pickPlan = function (key) {
+        originalPickPlan(key);
+        localStorage.setItem('dg_plan', key);
+      };
+
+      // Fallback for students whose card won't go through
+      var fallback = document.createElement('div');
+      fallback.className = 'trial-fallback';
+      fallback.innerHTML = '<a href="#">Card not going through? Sign up on WhatsApp instead</a>';
+      document.querySelector('.secure-note').insertAdjacentElement('afterend', fallback);
+      fallback.querySelector('a').addEventListener('click', function (e) {
+        e.preventDefault();
+        var checked = planSelected ? document.querySelector('input[name=plan]:checked') : null;
+        var msg = "Hi Drop&Go! I want the free trial but my card didn't go through.\n\n" +
+          detailsText(function (name) {
+            if (name === 'plan') return checked ? checked.value : '';
+            var el = document.getElementById(name);
+            return el ? el.value.trim() : '';
+          });
+        window.location.href = waLink(msg);
+      });
+    }
+
+    // ── 2. Back from PayFast: save-number + WhatsApp screen ──
+    if (params.get('payment') === 'trial') {
+      window.history.replaceState({}, '', window.location.pathname);
+      var get = function (name) { return localStorage.getItem('dg_' + name) || ''; };
+      var p = PLANS[get('plan')];
+      document.getElementById('trial-wa-btn').href =
+        waLink('Hi Drop&Go! I just signed up for the free trial 💧\n\n' + detailsText(get));
+      if (p) {
+        document.getElementById('trial-done-note').textContent =
+          'R0 charged today. Your first R' + p.price + ' is on ' + TRIAL_DATE_LABEL + ', unless you cancel before then.';
+      }
+      document.getElementById('trial-overlay').classList.add('show');
+      if (typeof startConfetti === 'function') { startConfetti(); setTimeout(stopConfetti, 5000); }
+    }
+  })();
+  </script>
 </body>
 </html>
