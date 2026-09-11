@@ -1186,7 +1186,7 @@
           '<div class="trial-banner-title">Free until ' + TRIAL_DATE_LABEL + '</div>' +
           '<div class="trial-banner-sub">R0 today. Your monthly plan starts on ' + TRIAL_DATE_LABEL + '.<br>Cancel before then and you pay nothing.</div>' +
         '</div>');
-      document.querySelector('.cancel-note').textContent = '✔ Cancel before ' + TRIAL_DATE_LABEL + ' and you pay nothing';
+      document.querySelector('.cancel-note').innerHTML = '&#x2714; Cancel before ' + TRIAL_DATE_LABEL + ' and you pay nothing. Do it yourself on <a href="https://my.payfast.io" target="_blank" rel="noopener" style="color:inherit;">PayFast</a><br><span style="color:var(--muted);font-size:11px;">Log in or register with the email you used to sign up. Stuck? WhatsApp us.</span>';
 
       // Remember the plan so the success screen can put it in the WhatsApp message
       var originalPickPlan = window.pickPlan;
