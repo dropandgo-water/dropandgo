@@ -1229,5 +1229,54 @@
     }
   })();
   </script>
+  <!-- ═══ SIGN-UP LOGGER: copies details to the Google Sheet just before PayFast opens ═══ -->
+  <script>
+  (function () {
+    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyUI0sBIIFXvOGeD7ygpYz-nhxz_Q73W9TwWIJmA0J3qog-saqmsqNZv-9ADy6k76EiSQ/exec';
+    if (SHEET_URL.indexOf('https://') !== 0) return;  // not set up yet, do nothing
+
+    var PLAN_NAMES = { '10m': '10L/week', '20m': '20L/week' };
+
+    function value(id) {
+      var el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    }
+
+    function logSignup(type) {
+      try {
+        var checked = (typeof planSelected !== 'undefined' && planSelected)
+          ? document.querySelector('input[name=plan]:checked') : null;
+        var data = new URLSearchParams({
+          type:      type,
+          plan:      checked ? (PLAN_NAMES[checked.value] || checked.value) : '',
+          name:      value('name_first'),
+          cell:      value('cell_number'),
+          residence: value('custom_str1'),
+          section:   value('custom_str2'),
+          room:      value('custom_str3')
+        });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(SHEET_URL, data);
+        } else {
+          fetch(SHEET_URL, { method: 'POST', body: data, mode: 'no-cors', keepalive: true });
+        }
+      } catch (err) { /* never block the sign-up */ }
+    }
+
+    // Log every time the form is actually sent to PayFast
+    var form = document.querySelector('form');
+    var realSubmit = HTMLFormElement.prototype.submit;
+    form.submit = function () {
+      logSignup(document.body.classList.contains('trial-mode') ? 'Trial' : 'Paid');
+      realSubmit.call(form);
+    };
+
+    // Also log students who tap "Card not going through? Sign up on WhatsApp instead"
+    var fallback = document.querySelector('.trial-fallback a');
+    if (fallback) {
+      fallback.addEventListener('click', function () { logSignup('Trial - card failed'); });
+    }
+  })();
+  </script>
 </body>
 </html>
